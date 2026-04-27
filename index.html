@@ -1,95 +1,1715 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>KIA Tigers HoloDeck</title>
-<meta name="theme-color" content="#070707" />
-<link rel="icon" type="image/png" href="./icon-192.png" />
-<link rel="apple-touch-icon" href="./icon-192.png" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@500;700;800&family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-<style>
-:root{--text:#f7f7fb;--soft:rgba(247,247,251,.78);--faint:rgba(247,247,251,.52);--line:rgba(255,255,255,.12);--panel:rgba(255,255,255,.06);--panel2:rgba(255,255,255,.1);--red:#eb0028;--hot:#ff5a6f;--blue:#87dcff;--shadow:0 20px 56px rgba(0,0,0,.32);--blur:blur(20px) saturate(170%);--safe:calc(26px + env(safe-area-inset-bottom))}*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}html,body{min-height:100%;background:#050505}body{font-family:"Pretendard","Apple SD Gothic Neo",sans-serif;color:var(--text);overflow-x:hidden;background:radial-gradient(circle at 15% 12%,rgba(255,74,104,.24),transparent 24%),radial-gradient(circle at 88% 20%,rgba(135,220,255,.14),transparent 18%),linear-gradient(180deg,#080808 0%,#040404 62%,#020202 100%)}body::before{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(180deg,rgba(255,255,255,.01) 0,rgba(255,255,255,.01) 1px,transparent 1px,transparent 8px);mix-blend-mode:soft-light;opacity:.08;z-index:0}button,input,textarea{font:inherit;color:inherit}button{border:0;background:none;cursor:pointer}a{color:inherit;text-decoration:none}.app{position:relative;z-index:1;width:min(100%,520px);margin:0 auto;padding:20px 18px var(--safe)}.status,.bar,.hero-top,.hero-actions,.hero-score,.score-row,.section-head,.forecast,.row,.nav,.tab-row,.lineup-row,.summary-row,.dense-head{display:flex;align-items:center;gap:10px}.status,.hero-top,.section-head,.score-row,.lineup-row{justify-content:space-between}.status{padding:6px 6px 14px;font-size:13px;color:var(--soft)}.bar{gap:8px}.screen.hidden{display:none!important}.glass,.card,.notice,.btn,.pill,.tag,.nav,.tile,.feed,.list,.save,.memo{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 18px 48px rgba(0,0,0,.28);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur)}.pill,.tag,.btn{padding:9px 13px;border-radius:999px;font-size:12px;color:var(--soft);white-space:nowrap}.btn{border-radius:16px;font-size:14px;font-weight:700}.btn.primary{background:linear-gradient(135deg,rgba(235,0,40,.92),rgba(255,90,111,.78));color:#fff}.app-shell{display:grid;gap:14px}.hero{position:relative;overflow:hidden;padding:22px;min-height:auto;border-radius:28px}.hero::before,.hero::after{content:"";position:absolute;border-radius:999px;pointer-events:none}.hero::before{top:-140px;right:-80px;width:240px;height:240px;background:radial-gradient(circle,rgba(255,90,111,.22),transparent 62%);filter:blur(10px)}.hero::after{display:none}.hero>*{position:relative;z-index:1}.live-chip{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;font-size:12px;color:var(--soft);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1)}.live-chip::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--hot);box-shadow:0 0 14px rgba(255,90,111,.9);animation:blink 1.8s ease infinite}.kicker{margin-top:22px;font-family:"Oxanium",sans-serif;font-size:12px;letter-spacing:.32em;color:var(--blue);text-transform:uppercase}.word{margin-top:10px;font-family:"Oxanium",sans-serif;font-size:clamp(34px,8vw,54px);line-height:1;letter-spacing:-.03em;text-shadow:none}.copy{margin-top:10px;max-width:100%;font-size:14px;line-height:1.65;color:rgba(247,247,251,.82)}.hero-actions{margin-top:14px;justify-content:flex-start;flex-wrap:wrap}.hero-score{margin-top:16px;display:grid;grid-template-columns:1fr 92px;gap:10px}.board{padding:16px;border-radius:20px;background:rgba(6,6,6,.42);border:1px solid rgba(255,255,255,.08)}.team{flex:1}.team-name{font-size:18px;font-weight:700}.team-sub,.sub,.meta,.feed-text,.small{font-size:13px;color:rgba(247,247,251,.76);line-height:1.55}.team-sub{margin-top:4px}.score{font-family:"Oxanium",sans-serif;font-size:38px;font-weight:800;min-width:44px;text-align:right}.stack{display:grid;gap:10px}.tile,.stat{padding:16px 14px;border-radius:20px;text-align:center}.tile label,.stat label{display:block;font-size:12px;color:rgba(247,247,251,.6);margin-bottom:8px}.tile strong,.stat strong,.big{font-family:"Oxanium",sans-serif;font-size:24px}.ticker{margin-top:18px;overflow:hidden;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.05);padding:0 14px}.ticker-track{display:block;min-width:0;padding:14px 0;font-size:13px;color:rgba(247,247,251,.78);line-height:1.6;animation:none;white-space:normal}.holo{display:none}.holo::before{display:none}.ring,.core{display:none}.core{display:none}.section{padding:18px;border-radius:28px}.section+.section{margin-top:16px}.title{font-size:20px;font-weight:800;letter-spacing:-.03em}.sub{margin-top:4px}.forecast{align-items:stretch;margin-top:16px}.card{flex:1.3;padding:18px;border-radius:24px;background:linear-gradient(160deg,rgba(235,0,40,.16),rgba(255,255,255,.04))}.card p{margin-top:10px;font-size:13px;line-height:1.7;color:var(--soft)}.big{display:block;font-size:30px;margin-top:14px}.side{flex:.9;display:grid;gap:10px}.grid{margin-top:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.summary-row{margin-top:12px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.summary-pill{padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}.summary-pill label{display:block;font-size:11px;color:rgba(247,247,251,.6);margin-bottom:6px}.summary-pill strong{font-size:14px;font-weight:700}.dense-card{padding:16px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}.dense-grid{margin-top:12px;display:grid;grid-template-columns:1.1fr .9fr;gap:10px}.compact-list{display:grid;gap:8px}.compact-item{padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}.compact-item strong{display:block;font-size:13px}.compact-item span{display:block;font-size:12px;color:rgba(247,247,251,.7);margin-top:3px}.dense-head{justify-content:space-between;margin-bottom:10px}.stat{text-align:left;padding:14px}.stat small{display:block;margin-top:6px;font-size:11px;color:var(--soft)}.wrap,.saved-list,.feed-list,.goods-list,.lineup-list{display:grid;gap:12px;margin-top:14px}.list,.save,.feed,.goods-link,.memo,.notice{padding:18px;border-radius:22px}.list-main{flex:1;min-width:0}.date{min-width:64px;text-align:center;padding:10px 8px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}.date strong{display:block;font-family:"Oxanium",sans-serif;font-size:24px;margin-top:4px}.list-title,.goods-title,.save-title,.lineup-name{font-size:17px;font-weight:700}.count{margin-top:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.count-card{padding:14px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);text-align:center}.count-card span{display:block;margin-top:6px;font-family:"Oxanium",sans-serif;font-size:22px}.diamond{margin-top:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-items:center;justify-items:center;max-width:220px}.base{width:38px;height:38px;border-radius:12px;transform:rotate(45deg);border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);display:grid;place-items:center}.base.on{background:linear-gradient(135deg,rgba(235,0,40,.9),rgba(255,90,111,.78));box-shadow:0 0 22px rgba(255,90,111,.28)}.base span{transform:rotate(-45deg);font-size:10px;font-weight:700}.tab-row{flex-wrap:wrap}.tab{padding:10px 14px;border-radius:16px;font-size:13px;font-weight:700;border:1px solid var(--line);background:rgba(255,255,255,.08)}.tab.active{background:linear-gradient(135deg,rgba(235,0,40,.92),rgba(255,90,111,.78));color:#fff}.order{width:32px;height:32px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.08);font-family:"Oxanium",sans-serif;font-size:14px}.feed-list{max-height:420px;overflow:auto;padding-right:4px}.feed-head{display:flex;justify-content:space-between;gap:10px;font-size:11px;color:var(--faint);margin-bottom:6px}.memo textarea{width:100%;min-height:96px;resize:vertical;background:transparent;border:0;outline:none;line-height:1.6}.nav{position:sticky;bottom:8px;margin-top:18px;padding:10px;border-radius:28px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.nav button{color:var(--faint);padding:10px 6px;border-radius:18px}.nav button.active{background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.06));color:var(--text);box-shadow:inset 0 1px 0 rgba(255,255,255,.18)}.nav button span{display:block;font-size:18px;margin-bottom:6px}.nav button strong{display:block;font-size:12px;font-weight:700}@keyframes drift{from{transform:translate3d(0,0,0)}to{transform:translate3d(0,-10px,0)}}@keyframes blink{0%,100%{opacity:1}50%{opacity:.45}}@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}@media (min-width:860px){.app{width:min(100%,1180px);padding:28px 26px 30px}.app-shell{grid-template-columns:1.08fr .92fr;align-items:start}.wide{grid-column:1 / -1}.nav{max-width:680px;margin-left:auto;margin-right:auto}}@media (max-width:720px){.hero{padding:20px;min-height:auto}.forecast,.dense-grid{flex-direction:column;display:grid;grid-template-columns:1fr}.grid,.count,.summary-row{grid-template-columns:1fr 1fr}.row,.lineup-row{flex-direction:column;align-items:flex-start}.hero-score{grid-template-columns:1fr}.side{grid-template-columns:1fr 1fr;display:grid}.compact-list{grid-template-columns:1fr}.word{font-size:32px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KIA 타이거즈 — 팬 사이트 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: #0C0C0E; color: #F2F2F4; min-height: 100vh;
+      font-family: 'Noto Sans KR', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0C0C0E; }
+    ::-webkit-scrollbar-thumb { background: #2A2A2E; border-radius: 3px; }
+
+    @keyframes livePulse {
+      0%,100% { opacity:1; box-shadow:0 0 0 0 rgba(232,0,29,0.4); }
+      50%      { opacity:0.6; box-shadow:0 0 0 6px rgba(232,0,29,0); }
+    }
+    @keyframes shimmer {
+      0%   { background-position: -200% 0; }
+      100% { background-position:  200% 0; }
+    }
+    @keyframes fadeIn {
+      from { opacity:0; transform:translateY(8px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .page-enter { animation: fadeIn 0.25s ease forwards; }
+
+    @media (max-width: 900px) {
+      .grid-3 { grid-template-columns: 1fr 1fr !important; }
+      .grid-2 { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 600px) {
+      .grid-3 { grid-template-columns: 1fr !important; }
+    }
+  </style>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js"
+    integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"
+    integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"
+    integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y"
+    crossorigin="anonymous"></script>
+
+  <script>
+  // KIA Tigers — API Service Layer (inlined to avoid cache issues)
+  var KIA_API = {
+    BASE: '/api/kboScores',
+    TEAM_CODE: 'HT',
+    SEASON: '2026',
+
+    async fetchToday(dateStr) {
+      var url = dateStr ? this.BASE + '?date=' + dateStr : this.BASE;
+      var r = await fetch(url);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    },
+    async fetchGame(gameId, inning) {
+      var url = this.BASE + '?gameId=' + gameId + (inning ? '&inning=' + inning : '');
+      var r = await fetch(url);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    },
+    async fetchLineup(gameId, inning) {
+      var url = this.BASE + '?gameId=' + gameId + '&action=lineup' + (inning ? '&inning=' + inning : '');
+      var r = await fetch(url);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    },
+    async fetchSeasonStats() {
+      var r = await fetch(this.BASE + '?action=seasonStats');
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    },
+    async fetchPlayerStats(tab) {
+      var r = await fetch(this.BASE + '?action=playerStats&tab=' + tab + '&teamCode=' + this.TEAM_CODE + '&seasonCode=' + this.SEASON);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      var d = await r.json();
+      var result = (d && d.result) ? d.result : d || {};
+      return result.seasonPlayerStats || result.playerList || result.players || result.list || [];
+    },
+    filterKIA: function(games) {
+      return (games || []).filter(function(g) { return g.home === 'KIA' || g.away === 'KIA'; });
+    },
+    nextGame: function(games) {
+      return this.filterKIA(games).find(function(g) { return g.status === 'SCHEDULED'; });
+    },
+    liveGame: function(games) {
+      return this.filterKIA(games).find(function(g) { return g.status === 'LIVE'; });
+    },
+  };
+
+  var TEAM_LOGO = {
+    KIA:'K', KT:'KT', LG:'L', SSG:'SS', NC:'N',
+    '두산':'D', '롯데':'R', '삼성':'S', '한화':'H', '키움':'Hi',
+  };
+  var HOME_STADIUM = {
+    KIA:'광주 기아챔피언스필드', KT:'수원KT위즈파크', LG:'잠실야구장',
+    두산:'잠실야구장', SSG:'인천SSG랜더스필드', NC:'창원NC파크',
+    롯데:'사직야구장', 삼성:'대구 삼성라이온즈파크', 한화:'대전 한화생명볼파크', 키움:'고척스카이돔',
+  };
+  function fmtDate(str) {
+    if (!str) return '';
+    var s = String(str).replace(/-/g,'');
+    if (s.length < 8) return str;
+    return s.slice(4,6) + '.' + s.slice(6,8);
+  }
+  function fmtDay(str) {
+    if (!str) return '';
+    var d = new Date(String(str).replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3'));
+    return ['일','월','화','수','목','금','토'][d.getDay()];
+  }
+  function streakLabel(type, n) {
+    if (!type || !n) return '—';
+    var word = type === 'W' ? '연승' : type === 'L' ? '연패' : '연속무';
+    return n + word;
+  }
+  </script>
 </head>
 <body>
-<main class="app">
-<div class="status"><strong id="clock">9:41</strong><div class="bar"><div class="pill">SEOUL</div><div class="pill" id="conn">READY</div></div></div>
-<section class="screen" data-screen="home">
-<div class="app-shell">
-<section class="hero glass">
-<div class="hero-top"><div class="live-chip" id="heroChip">LIVE COMMAND</div><div class="pill" id="heroStadium">Gwangju Base</div></div>
-<div class="kicker">KIA Sports Dashboard</div>
-<div class="word">KIA vs <span id="heroOpponent">OPP</span></div>
-<p class="copy" id="heroCopy">오늘 경기 핵심 정보와 시즌 흐름, 시리즈 일정을 한 화면에서 빠르게 확인할 수 있습니다.</p>
-<div class="hero-score">
-<div class="board">
-<div class="score-row"><div class="team"><div class="team-name" id="awayName">상대팀</div><div class="team-sub" id="awaySub">경기 정보를 불러오는 중입니다.</div></div><div class="score" id="awayScore">-</div></div>
-<div class="score-row"><div class="team"><div class="team-name" id="homeName">KIA 타이거즈</div><div class="team-sub" id="homeSub">실시간 경기 데이터 연결 대기</div></div><div class="score" id="homeScore">-</div></div>
-</div>
-<div class="stack"><div class="tile"><label>STATUS</label><strong id="heroStatus">READY</strong></div><div class="tile"><label>INNING</label><strong id="heroInning">-</strong></div></div>
-</div>
-<div class="summary-row">
-<div class="summary-pill"><label>구장</label><strong id="summaryVenue">-</strong></div>
-<div class="summary-pill"><label>선발</label><strong id="summaryStarter">-</strong></div>
-<div class="summary-pill"><label>상대</label><strong id="summaryOpponent">-</strong></div>
-<div class="summary-pill"><label>업데이트</label><strong id="updatedAt">--:--</strong></div>
-</div>
-<div class="hero-actions"><button class="btn primary" id="refreshBtn" type="button">실시간 새로고침</button><button class="btn" id="saveGameBtn" type="button">오늘 경기 저장</button></div>
-<div class="ticker"><div class="ticker-track" id="ticker">KIA 실시간 데이터 로딩 중 • 경기 흐름 분석 준비 • 시리즈 일정 연결 중 • 저장된 응원 메모 동기화 •</div></div>
-<div class="holo"><div class="ring"></div><div class="core"></div></div>
-</section>
-<section class="section glass" style="margin-top:0"><div class="section-head"><div><div class="title">승부 예측 엔진</div><div class="sub">현재 경기와 시즌 지표를 한 화면에</div></div><div class="pill" id="seasonChip">SEASON</div></div><div class="dense-grid"><div class="card"><span class="pill" id="forecastBadge">TODAY FOCUS</span><strong class="big" id="forecastTitle">데이터를 불러오는 중</strong><p id="forecastCopy">기아 경기와 시즌 기록을 연결해 지금 볼 만한 포인트를 자동으로 정리합니다.</p></div><div class="compact-list"><div class="compact-item"><strong id="seasonPct">-</strong><span id="seasonRecord">시즌 기록</span></div><div class="compact-item"><strong id="seasonStreak">-</strong><span id="seasonTotal">연속 흐름</span></div><div class="compact-item"><strong id="heroMetaA">-</strong><span id="heroMetaAText">경기 메타</span></div><div class="compact-item"><strong id="heroMetaB">-</strong><span id="heroMetaBText">추가 정보</span></div></div></div><div class="grid" id="homeGrid"><article class="stat"><label>경기 상태</label><strong>-</strong><small>연결 대기</small></article></div></section>
-<section class="section glass wide"><div class="section-head"><div><div class="title">시리즈 커맨드</div><div class="sub">이번 주 기아 경기 일정을 실제 데이터로 표시</div></div><div class="pill" id="seriesChip">WEEK VIEW</div></div><div class="wrap" id="seriesList"><div class="list row"><div class="list-main"><div class="list-title">일정을 불러오는 중</div><div class="small">KIA 경기 데이터를 수집하고 있습니다.</div></div></div></div></section>
-<section class="section glass wide"><div class="section-head"><div><div class="title">팬 액션 큐브</div><div class="sub">지금 바로 쓸 수 있는 기능 연결</div></div><div class="pill">FAST ACCESS</div></div><div class="goods-list"><a class="goods-link row" href="https://tickets.interpark.com/" target="_blank" rel="noreferrer"><div class="list-main"><div class="goods-title">티켓 예매 바로가기</div><div class="small">인터파크 티켓에서 경기 예매 페이지로 이동</div></div><div class="tag">OPEN</div></a><a class="goods-link row" href="https://teamstore.kia.com/" target="_blank" rel="noreferrer"><div class="list-main"><div class="goods-title">KIA 팀스토어</div><div class="small">공식 굿즈와 유니폼을 바로 확인</div></div><div class="tag">SHOP</div></a></div></section>
-</div>
-</section>
-<section class="screen hidden" data-screen="live"><section class="section glass"><div class="dense-head"><div><div class="title">라이브 센터</div><div class="sub">볼카운트, 주자 상황, 라인업, 문자 중계</div></div><div class="pill" id="liveChip">LIVE VIEW</div></div><div class="summary-row"><div class="summary-pill"><label>투수</label><strong id="pitcherName">-</strong></div><div class="summary-pill"><label>타자</label><strong id="batterName">-</strong></div><div class="summary-pill"><label>구장</label><strong id="venueName">-</strong></div><div class="summary-pill"><label>상황</label><strong id="momentChip">-</strong></div></div><div class="card" style="margin-top:12px"><strong class="big" id="momentTitle">실시간 경기 대기 중</strong><p id="momentCopy">오늘 KIA 경기가 있으면 현재 타석과 경기 흐름을 여기에 보여줍니다.</p></div><div class="count"><div class="count-card"><label>BALL</label><span id="ballCount">0</span></div><div class="count-card"><label>STRIKE</label><span id="strikeCount">0</span></div><div class="count-card"><label>OUT</label><span id="outCount">0</span></div></div><div class="dense-card" style="margin-top:12px"><div class="dense-head"><div><div class="title" style="font-size:17px">이닝별 스코어</div><div class="sub">이닝별 득점 흐름</div></div><div class="pill">LINESCORE</div></div><div id="inningBoard"><div class="notice"><strong>점수표 대기 중</strong><p>실시간 데이터가 연결되면 이닝별 점수표가 표시됩니다.</p></div></div></div><div class="dense-grid" style="margin-top:12px"><div class="dense-card"><div class="dense-head"><div><div class="title" style="font-size:17px">베이스 / 라인업</div><div class="sub">실시간 라인업 / 최근 확인 라인업</div></div><div class="tab-row"><button class="tab active" type="button" data-side="kia">KIA</button><button class="tab" type="button" data-side="opp">상대</button></div></div><div class="diamond"><div></div><div class="base" id="base2"><span>2</span></div><div></div><div class="base" id="base3"><span>3</span></div><div class="base"><span>H</span></div><div class="base" id="base1"><span>1</span></div><div></div><div></div><div></div></div><div class="lineup-list" id="lineupList"><div class="notice"><strong>라인업 대기 중</strong><p>경기 데이터가 연결되면 타순과 포지션이 여기에 표시됩니다.</p></div></div></div><div class="dense-card"><div class="dense-head"><div><div class="title" style="font-size:17px">실시간 문자 중계</div><div class="sub">API에서 받아온 최근 이벤트</div></div><button class="btn" type="button" id="feedBtn">중계 새로고침</button></div><div class="feed-list" id="feedList"><div class="notice"><strong>중계 대기 중</strong><p>경기가 시작되면 최근 문자 중계가 표시됩니다.</p></div></div></div></div></section></section>
-<section class="screen hidden" data-screen="series"><section class="section glass"><div class="section-head"><div><div class="title">시리즈 보드</div><div class="sub">이번 주 KIA 일정만 따로 보기</div></div><button class="btn" id="reloadSeriesBtn" type="button">일정 갱신</button></div><div class="wrap" id="seriesBoard"><div class="list row"><div class="list-main"><div class="list-title">일정 대기 중</div><div class="small">곧 실제 경기 일정이 표시됩니다.</div></div></div></div></section></section>
-<section class="screen hidden" data-screen="goods"><section class="section glass"><div class="section-head"><div><div class="title">굿즈 & 링크</div><div class="sub">실사용 가능한 외부 연결</div></div><div class="pill">GOODS VIEW</div></div><div class="goods-list"><a class="goods-link row" href="https://teamstore.kia.com/" target="_blank" rel="noreferrer"><div class="list-main"><div class="goods-title">KIA 공식 팀스토어</div><div class="small">공식 유니폼, 모자, 응원용품 구매</div></div><div class="tag">OFFICIAL</div></a><a class="goods-link row" href="https://www.kia.com/kr" target="_blank" rel="noreferrer"><div class="list-main"><div class="goods-title">KIA 공식 사이트</div><div class="small">구단/브랜드 관련 공식 정보 확인</div></div><div class="tag">LINK</div></a><a class="goods-link row" href="https://www.instagram.com/always_kia_tigers/" target="_blank" rel="noreferrer"><div class="list-main"><div class="goods-title">KIA Tigers Instagram</div><div class="small">최근 팀 소식과 콘텐츠 확인</div></div><div class="tag">SNS</div></a></div></section></section>
-<section class="screen hidden" data-screen="my"><section class="section glass"><div class="section-head"><div><div class="title">MY TIGERS</div><div class="sub">오늘 경기 저장, 응원 메모, 최근 확인 기록</div></div><button class="btn" id="clearSavedBtn" type="button">저장 초기화</button></div><div class="memo"><label class="small" for="fanNote">응원 메모</label><textarea id="fanNote" placeholder="오늘 경기 메모, 응원 포인트, 선수 기록 등을 적어둘 수 있어요."></textarea><div class="hero-actions" style="margin-top:12px"><button class="btn primary" id="saveNoteBtn" type="button">메모 저장</button></div></div><div id="noteNotice"></div><div class="saved-list" id="savedList"><div class="notice"><strong>저장된 경기가 없습니다</strong><p>홈 화면의 '오늘 경기 저장' 버튼을 누르면 여기에 쌓입니다.</p></div></div></section></section>
-<nav class="nav"><button class="active" type="button" data-target="home"><span>◉</span><strong>홈</strong></button><button type="button" data-target="live"><span>◎</span><strong>라이브</strong></button><button type="button" data-target="series"><span>◌</span><strong>시리즈</strong></button><button type="button" data-target="goods"><span>◈</span><strong>굿즈</strong></button><button type="button" data-target="my"><span>◍</span><strong>MY</strong></button></nav>
-</main>
-<script>
-const state={games:[],selectedGame:null,season:null,series:[],lineupSide:'kia',lineup:null,saved:[],note:'',updated:null,auto:null};
-const el={clock:document.getElementById('clock'),conn:document.getElementById('conn'),screens:document.querySelectorAll('.screen'),nav:document.querySelectorAll('.nav button'),heroChip:document.getElementById('heroChip'),heroStadium:document.getElementById('heroStadium'),heroOpponent:document.getElementById('heroOpponent'),heroCopy:document.getElementById('heroCopy'),awayName:document.getElementById('awayName'),awaySub:document.getElementById('awaySub'),awayScore:document.getElementById('awayScore'),homeName:document.getElementById('homeName'),homeSub:document.getElementById('homeSub'),homeScore:document.getElementById('homeScore'),heroStatus:document.getElementById('heroStatus'),heroInning:document.getElementById('heroInning'),summaryVenue:document.getElementById('summaryVenue'),summaryStarter:document.getElementById('summaryStarter'),summaryOpponent:document.getElementById('summaryOpponent'),ticker:document.getElementById('ticker'),seasonChip:document.getElementById('seasonChip'),forecastBadge:document.getElementById('forecastBadge'),forecastTitle:document.getElementById('forecastTitle'),forecastCopy:document.getElementById('forecastCopy'),seasonPct:document.getElementById('seasonPct'),seasonRecord:document.getElementById('seasonRecord'),seasonStreak:document.getElementById('seasonStreak'),seasonTotal:document.getElementById('seasonTotal'),heroMetaA:document.getElementById('heroMetaA'),heroMetaAText:document.getElementById('heroMetaAText'),heroMetaB:document.getElementById('heroMetaB'),heroMetaBText:document.getElementById('heroMetaBText'),updatedAt:document.getElementById('updatedAt'),homeGrid:document.getElementById('homeGrid'),seriesChip:document.getElementById('seriesChip'),seriesList:document.getElementById('seriesList'),seriesBoard:document.getElementById('seriesBoard'),refreshBtn:document.getElementById('refreshBtn'),saveGameBtn:document.getElementById('saveGameBtn'),liveChip:document.getElementById('liveChip'),momentChip:document.getElementById('momentChip'),momentTitle:document.getElementById('momentTitle'),momentCopy:document.getElementById('momentCopy'),pitcherName:document.getElementById('pitcherName'),batterName:document.getElementById('batterName'),venueName:document.getElementById('venueName'),ballCount:document.getElementById('ballCount'),strikeCount:document.getElementById('strikeCount'),outCount:document.getElementById('outCount'),base1:document.getElementById('base1'),base2:document.getElementById('base2'),base3:document.getElementById('base3'),sideTabs:document.querySelectorAll('[data-side]'),lineupList:document.getElementById('lineupList'),inningBoard:document.getElementById('inningBoard'),feedList:document.getElementById('feedList'),feedBtn:document.getElementById('feedBtn'),reloadSeriesBtn:document.getElementById('reloadSeriesBtn'),fanNote:document.getElementById('fanNote'),saveNoteBtn:document.getElementById('saveNoteBtn'),noteNotice:document.getElementById('noteNotice'),savedList:document.getElementById('savedList'),clearSavedBtn:document.getElementById('clearSavedBtn')};
-const KEY_NOTE='kia_holodeck_note';const KEY_SAVED='kia_holodeck_saved';
-const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
-const isKia=g=>g&&(g.home==='KIA'||g.away==='KIA'); const opp=g=>g.home==='KIA'?g.away:g.home; const homeGame=g=>g&&g.home==='KIA';
-const statusLabel=g=>!g?'READY':g.status==='LIVE'?'LIVE':g.status==='FINAL'?'FINAL':g.status==='CANCELED'?'CANCEL':'SCHEDULED';
-function setClock(){const n=new Date();el.clock.textContent=`${n.getHours()}:${String(n.getMinutes()).padStart(2,'0')}`}
-function apiUrl(path,q={}){const u=new URL(path,window.location.origin);Object.entries(q).forEach(([k,v])=>{if(v!==undefined&&v!==null&&v!=='')u.searchParams.set(k,v)});return u.toString()}
-async function api(path,q){if(window.location.protocol==='file:')throw new Error('이 앱은 file:// 직접 실행이 아니라 Vercel 또는 로컬 서버 환경에서 열어야 API가 동작합니다.');const r=await fetch(apiUrl(path,q),{cache:'no-store'});if(!r.ok)throw new Error(await r.text()||`HTTP ${r.status}`);return r.json()}
-async function fetchSeries(){const today=new Date(),all=[],seen=new Set();for(let i=0;i<7;i++){const d=new Date(today);d.setDate(today.getDate()+i);const ds=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;try{const data=await api('/api/kboScores',{date:ds});(data.games||[]).filter(isKia).forEach(g=>{if(!seen.has(g.gameId)){seen.add(g.gameId);all.push(g)}})}catch(e){console.warn('series',ds,e)}}return all}
-function pickGame(games){const kia=games.filter(isKia);return kia.find(g=>g.status==='LIVE')||kia.find(g=>g.status==='SCHEDULED')||[...kia].reverse().find(g=>g.status==='FINAL')||kia[0]||null}
-function setConn(t){el.conn.textContent=t}
-function setScreen(target){el.screens.forEach(s=>s.classList.toggle('hidden',s.dataset.screen!==target));el.nav.forEach(b=>b.classList.toggle('active',b.dataset.target===target))}
-function setSide(side){state.lineupSide=side;el.sideTabs.forEach(b=>b.classList.toggle('active',b.dataset.side===side));renderLineup()}
-function renderSeries(list,target){if(!list.length){target.innerHTML='<div class="notice"><strong>표시할 KIA 일정이 없습니다</strong><p>잠시 후 다시 시도하거나 새로고침 버튼을 눌러 주세요.</p></div>';return}target.innerHTML=list.map(g=>{const d=new Date(g.date);const wd=Number.isNaN(d.getTime())?'-':new Intl.DateTimeFormat('ko-KR',{weekday:'short'}).format(d);const day=Number.isNaN(d.getTime())?'-':String(d.getDate()).padStart(2,'0');const title=`${homeGame(g)?'vs':'at'} ${opp(g)}`;const scoreText=g.status==='SCHEDULED'?`${g.time||'-'} 시작`:`${g.home} ${g.homeScore??'-'} : ${g.awayScore??'-'} ${g.away}`;const copy=[g.stad||'구장 미정',g.inningInfo||statusLabel(g)].filter(Boolean).join(' · ');return `<article class="list row"><div class="date"><span>${esc(wd)}</span><strong>${esc(day)}</strong></div><div class="list-main"><div class="list-title">${esc(title)}</div><div class="small">${esc(copy)}</div><div class="small">${esc(scoreText)}</div></div><div class="tag">${esc(statusLabel(g))}</div></article>`}).join('')}
-function renderHome(){const g=state.selectedGame,s=state.season;if(!g){el.heroChip.textContent='NO GAME';el.heroStadium.textContent='일정 없음';if(el.heroOpponent)el.heroOpponent.textContent='OFF';el.awayName.textContent='경기 없음';el.awaySub.textContent='오늘은 KIA 경기가 없습니다.';el.awayScore.textContent='-';el.homeName.textContent='KIA 타이거즈';el.homeSub.textContent='다음 일정은 시리즈 탭에서 확인할 수 있습니다.';el.homeScore.textContent='-';el.heroStatus.textContent='OFF';el.heroInning.textContent='-';if(el.summaryVenue)el.summaryVenue.textContent='-';if(el.summaryStarter)el.summaryStarter.textContent='-';if(el.summaryOpponent)el.summaryOpponent.textContent='-';if(el.heroMetaA){el.heroMetaA.textContent='OFF';el.heroMetaAText.textContent='오늘 경기 없음'}if(el.heroMetaB){el.heroMetaB.textContent='SERIES';el.heroMetaBText.textContent='다음 일정 확인'}el.heroCopy.textContent='오늘 KIA 경기가 없어서 주간 일정과 저장된 기록 중심으로 앱을 사용할 수 있습니다.';el.ticker.textContent='오늘은 KIA 경기가 없습니다 • 시리즈 탭에서 이번 주 일정을 확인하세요 • MY 탭에 응원 메모를 저장할 수 있습니다 •'}else{const opponent=opp(g);if(el.heroOpponent)el.heroOpponent.textContent=opponent;el.heroChip.textContent=`${statusLabel(g)} COMMAND`;el.heroStadium.textContent=g.stad||'구장 정보 대기';el.awayName.textContent=g.away||'AWAY';el.homeName.textContent=g.home||'HOME';el.awaySub.textContent=g.awayStarter?`선발 ${g.awayStarter}`:'선발 정보 대기';el.homeSub.textContent=g.homeStarter?`선발 ${g.homeStarter}`:'선발 정보 대기';el.awayScore.textContent=g.awayScore??'-';el.homeScore.textContent=g.homeScore??'-';el.heroStatus.textContent=statusLabel(g);el.heroInning.textContent=g.inningInfo||(g.status==='SCHEDULED'?(g.time||'-'):'-');if(el.summaryVenue)el.summaryVenue.textContent=g.stad||'-';if(el.summaryStarter)el.summaryStarter.textContent=homeGame(g)?(g.homeStarter||'-'):(g.awayStarter||'-');if(el.summaryOpponent)el.summaryOpponent.textContent=opponent;if(el.heroMetaA){el.heroMetaA.textContent=homeGame(g)?'HOME':'AWAY';el.heroMetaAText.textContent=homeGame(g)?'홈 경기':'원정 경기'}if(el.heroMetaB){el.heroMetaB.textContent=g.time||statusLabel(g);el.heroMetaBText.textContent='시작 / 상태'}el.heroCopy.textContent=g.status==='LIVE'?`현재 ${opponent}전이 진행 중입니다. 라이브 탭에서 볼카운트, 주자 상황, 문자 중계를 바로 볼 수 있습니다.`:g.status==='FINAL'?`${opponent}전이 종료되었습니다. 결과와 최근 기록을 MY 탭에 저장해둘 수 있습니다.`:`${opponent}전이 ${g.time||'예정 시간 미정'}에 시작됩니다. 선발과 시리즈 흐름을 미리 확인할 수 있습니다.`;const t=[`${g.home} ${g.homeScore??'-'} : ${g.awayScore??'-'} ${g.away}`,g.inningInfo||'경기 상태 정보 대기',g.stad||'구장 정보 대기',g.homeStarter?`KIA 선발 ${g.homeStarter}`:'선발 정보 대기',s?`시즌 ${s.wins}승 ${s.losses}패 ${s.draws}무`:'시즌 기록 불러오는 중'];el.ticker.textContent=`${t.join(' • ')} • ${t.join(' • ')} •`}if(s){el.seasonChip.textContent='SEASON LIVE';el.seasonPct.textContent=s.pct||'-';el.seasonRecord.textContent=`${s.wins}승 ${s.losses}패 ${s.draws}무`;el.seasonStreak.textContent=s.streakType?`${s.streakType}${s.streak}`:'-';el.seasonTotal.textContent=`총 ${s.total}경기`}el.forecastTitle.textContent=g.status==='LIVE'?`${opponent}전 ${g.inningInfo||'실시간 진행 중'}`:g.status==='FINAL'?`${opponent}전 경기 종료`:`${opponent}전 경기 예정`;el.forecastCopy.textContent=g.status==='LIVE'?'지금은 라이브 탭에서 투수/타자, 볼카운트, 주자 상황, 실시간 문자 중계를 바로 확인하는 것이 가장 유용합니다.':g.status==='FINAL'?'종료된 경기 결과를 저장하고 다음 경기 일정을 시리즈 탭에서 이어서 확인할 수 있습니다.':'예정 경기의 선발, 시간, 구장을 먼저 확인하고 티켓 예매나 응원 메모를 준비할 수 있습니다.';el.forecastBadge.textContent=statusLabel(g);const cards=[{label:'경기 상태',value:statusLabel(g),copy:g.inningInfo||'상태 정보'},{label:'구장',value:g.stad||'-',copy:g.date||'-'},{label:'상대 팀',value:opponent,copy:homeGame(g)?'홈 경기':'원정 경기'}];el.homeGrid.innerHTML=cards.map(c=>`<article class="stat"><label>${esc(c.label)}</label><strong>${esc(c.value)}</strong><small>${esc(c.copy)}</small></article>`).join('');if(state.updated){el.updatedAt.textContent=new Intl.DateTimeFormat('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false}).format(state.updated)}}
-function renderLineup(){const data=state.lineup;if(!data){el.lineupList.innerHTML='<div class="notice"><strong>라인업 대기 중</strong><p>해당 경기의 라인업 정보를 아직 불러오지 못했습니다.</p></div>';return}const g=state.selectedGame;const key=state.lineupSide==='kia'?(homeGame(g)?'homeLineup':'awayLineup'):(homeGame(g)?'awayLineup':'homeLineup');const batters=data[key]?.batter||[];if(!batters.length){el.lineupList.innerHTML='<div class="notice"><strong>표시할 타순이 없습니다</strong><p>이 경기의 라인업 데이터가 아직 준비되지 않았습니다.</p></div>';return}el.lineupList.innerHTML=batters.map(p=>`<article class="list lineup-row"><div class="order">${esc(p.batOrder||'-')}</div><div class="list-main"><div class="lineup-name">${esc(p.name||'-')}</div><div class="small">${esc(p.posName||'포지션 정보 없음')}</div><div class="small">AB ${esc(p.ab)} · H ${esc(p.hit)} · RBI ${esc(p.rbi)} · BB ${esc(p.bb)}</div></div></article>`).join('')}
-function renderInningBoard(){const g=state.selectedGame,away=Array.isArray(g?.awayInnings)?g.awayInnings:[],home=Array.isArray(g?.homeInnings)?g.homeInnings:[];if(!g||(!away.some(v=>v>=0)&&!home.some(v=>v>=0))){el.inningBoard.innerHTML='<div class="notice"><strong>점수표 없음</strong><p>이 경기의 이닝별 점수 데이터가 아직 없습니다.</p></div>';return}const max=Math.max(9,away.length,home.length);const head=Array.from({length:max},(_,i)=>`<th style="padding:8px 6px;font-size:11px;color:rgba(247,247,251,.6);font-weight:600">${i+1}</th>`).join('');const row=(name,vals,total)=>`<tr><td style="padding:10px 8px;text-align:left;font-weight:700;white-space:nowrap">${esc(name)}</td>${Array.from({length:max},(_,i)=>{const v=vals[i];return `<td style="padding:10px 6px;text-align:center;font-size:13px">${v===-1||v===undefined?'':esc(v)}</td>`}).join('')}<td style="padding:10px 8px;text-align:center;font-weight:800">${total??'-'}</td></tr>`;el.inningBoard.innerHTML=`<div style="overflow:auto"><table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr><th style="padding:8px 8px;text-align:left">TEAM</th>${head}<th style="padding:8px 8px">R</th></tr></thead><tbody>${row(g.away||'AWAY',away,g.awayScore)}${row(g.home||'HOME',home,g.homeScore)}</tbody></table></div>`}
-function renderFeed(){const g=state.selectedGame,relays=Array.isArray(g?.textRelays)?g.textRelays.slice(0,12):[];if(!relays.length){el.feedList.innerHTML='<div class="notice"><strong>문자 중계 없음</strong><p>이 경기의 중계 데이터가 아직 없거나 API 응답이 비어 있습니다.</p></div>';return}el.feedList.innerHTML=relays.map((r,i)=>{const inn=r.inning||r.currentInning||r.inningNum||g?.inningInfo||`EVENT ${i+1}`;const title=r.title||r.resultText||r.type||'중계';const text=r.text||r.resultText||r.description||r.title||'내용 없음';return `<article class="feed"><div class="feed-head"><span>${esc(String(inn))}</span><span>${esc(String(title))}</span></div><div class="feed-text">${esc(String(text))}</div></article>`}).join('')}
-function renderLive(){const g=state.selectedGame,gs=g?.currentGameState||{};el.liveChip.textContent=g?statusLabel(g):'NO GAME';el.momentChip.textContent=g?.inningInfo||'CURRENT MOMENT';if(!g){el.momentTitle.textContent='오늘 KIA 경기가 없습니다';el.momentCopy.textContent='오늘 경기가 없으면 이 화면은 가장 최근에 확인한 경기 저장 또는 다음 일정 준비용으로 사용할 수 있습니다.';el.pitcherName.textContent='-';el.batterName.textContent='-';el.venueName.textContent='-';el.ballCount.textContent='0';el.strikeCount.textContent='0';el.outCount.textContent='0';[el.base1,el.base2,el.base3].forEach(b=>b.classList.remove('on'));el.lineupList.innerHTML='<div class="notice"><strong>라인업 없음</strong><p>오늘 KIA 경기가 없어서 라인업 정보가 비어 있습니다.</p></div>';el.inningBoard.innerHTML='<div class="notice"><strong>점수표 없음</strong><p>오늘 KIA 경기가 없어서 이닝별 점수표도 비어 있습니다.</p></div>';el.feedList.innerHTML='<div class="notice"><strong>문자 중계 없음</strong><p>실시간 경기일 때 최근 중계 이벤트가 표시됩니다.</p></div>';return}el.momentTitle.textContent=g.status==='LIVE'?`${g.inningInfo||'실시간 경기'} · ${g.homeScore??'-'}:${g.awayScore??'-'}`:g.status==='FINAL'?`${opp(g)}전 경기 종료`:`${opp(g)}전 경기 예정`;el.momentCopy.textContent=g.status==='LIVE'?'현재 타석과 볼카운트, 주자 상황이 API 응답에 따라 실시간으로 바뀝니다.':g.status==='FINAL'?'경기는 끝났지만 마지막으로 확인한 라인업과 문자 중계를 다시 볼 수 있습니다.':'경기 시작 전에는 선발과 예정 시각, 구장 정보 위주로 표시됩니다.';el.pitcherName.textContent=gs.pitcherName||g.homeStarter||g.awayStarter||'-';el.batterName.textContent=gs.batterName||'-';el.venueName.textContent=g.stad||'-';el.ballCount.textContent=String(gs.ball??0);el.strikeCount.textContent=String(gs.strike??0);el.outCount.textContent=String(gs.out??0);el.base1.classList.toggle('on',Boolean(gs.base1));el.base2.classList.toggle('on',Boolean(gs.base2));el.base3.classList.toggle('on',Boolean(gs.base3));renderLineup();renderInningBoard();renderFeed()}
-function renderSaved(){if(!state.saved.length){el.savedList.innerHTML='<div class="notice"><strong>저장된 경기가 없습니다</strong><p>홈 화면에서 오늘 경기를 저장하면 여기에 쌓입니다.</p></div>';return}el.savedList.innerHTML=state.saved.map((it,i)=>`<article class="save row"><div class="list-main"><div class="save-title">${esc(it.title)}</div><div class="small">${esc(it.subtitle)}</div><div class="small">저장 시각 ${esc(it.savedAt)}</div></div><button class="btn" type="button" data-remove="${i}">삭제</button></article>`).join('');document.querySelectorAll('[data-remove]').forEach(b=>b.addEventListener('click',()=>{state.saved.splice(Number(b.dataset.remove),1);persistSaved();renderSaved()}))}
-function noteNotice(msg,error){el.noteNotice.innerHTML=`<div class="notice${error?' error':''}"><strong>${error?'저장 실패':'저장 완료'}</strong><p>${esc(msg)}</p></div>`}
-function persistSaved(){localStorage.setItem(KEY_SAVED,JSON.stringify(state.saved))}
-function loadLocal(){try{state.saved=JSON.parse(localStorage.getItem(KEY_SAVED)||'[]')}catch{state.saved=[]}state.note=localStorage.getItem(KEY_NOTE)||'';el.fanNote.value=state.note}
-function saveNote(){const note=el.fanNote.value.trim();localStorage.setItem(KEY_NOTE,note);state.note=note;noteNotice('응원 메모를 이 브라우저에 저장했습니다.')}
-function saveGame(){const g=state.selectedGame;if(!g){noteNotice('저장할 KIA 경기가 없습니다.',true);return}state.saved.unshift({title:`${g.home} vs ${g.away}`,subtitle:`${statusLabel(g)} · ${g.inningInfo||g.time||'-'} · ${g.stad||'구장 정보 없음'}`,savedAt:new Intl.DateTimeFormat('ko-KR',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date()),gameId:g.gameId});state.saved=state.saved.slice(0,20);persistSaved();renderSaved();noteNotice('오늘 경기 정보를 MY TIGERS에 저장했습니다.')}
-async function refreshDetail(){const g=state.selectedGame;if(!g?.gameId)return;try{const [detail,lineup]=await Promise.all([api('/api/kboScores',{gameId:g.gameId}),api('/api/kboScores',{gameId:g.gameId,action:'lineup'}).catch(()=>null)]);state.selectedGame={...detail};state.lineup=lineup}catch(e){console.warn('detail refresh failed',e)}renderHome();renderLive()}
-async function loadAll(){setConn('SYNC');try{const [games,season,series]=await Promise.all([api('/api/kboScores').then(d=>d.games||[]),api('/api/kboScores',{action:'seasonStats'}).catch(()=>null),fetchSeries()]);state.games=games;state.season=season;state.series=series;state.selectedGame=pickGame(games);state.updated=new Date();if(state.selectedGame?.gameId){await refreshDetail()}else{state.lineup=null;renderHome();renderLive()}el.seriesChip.textContent=`${series.length} GAMES`;renderSeries(series,el.seriesList);renderSeries(series,el.seriesBoard);setConn('LIVE')}catch(e){console.error(e);setConn('ERROR');el.heroCopy.textContent=e.message;const card=`<div class="notice error"><strong>데이터 연결 실패</strong><p>${esc(e.message)}</p></div>`;el.seriesList.innerHTML=card;el.seriesBoard.innerHTML=card;el.feedList.innerHTML=card;el.lineupList.innerHTML=card;el.inningBoard.innerHTML=card}}
-function auto(){if(state.auto)clearInterval(state.auto);state.auto=setInterval(loadAll,60000)}
-function pwa(){if(window.location.protocol==='file:')return;const link=document.createElement('link');link.rel='manifest';link.href='./manifest.json';document.head.appendChild(link);if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
-el.nav.forEach(b=>b.addEventListener('click',()=>setScreen(b.dataset.target)));el.sideTabs.forEach(b=>b.addEventListener('click',()=>setSide(b.dataset.side)));el.refreshBtn.addEventListener('click',loadAll);el.feedBtn.addEventListener('click',refreshDetail);el.reloadSeriesBtn.addEventListener('click',async()=>{state.series=await fetchSeries();renderSeries(state.series,el.seriesList);renderSeries(state.series,el.seriesBoard)});el.saveGameBtn.addEventListener('click',saveGame);el.saveNoteBtn.addEventListener('click',saveNote);el.clearSavedBtn.addEventListener('click',()=>{state.saved=[];persistSaved();renderSaved();noteNotice('저장된 경기 목록을 비웠습니다.')});setClock();setInterval(setClock,30000);loadLocal();renderSaved();pwa();loadAll();auto();
+  <div id="root"></div>
+
+  <script type="text/babel">
+// KIA Tigers - Shared Components & Navigation
+
+const { useState, useEffect, useRef } = React;
+
+const C = {
+  red:     "#E8001D",
+  redDark: "#B0001A",
+  redGlow: "rgba(232,0,29,0.25)",
+  gold:    "#F5A623",
+  bg:      "#0C0C0E",
+  surface: "#141416",
+  card:    "#1C1C1F",
+  cardHov: "#242428",
+  border:  "rgba(255,255,255,0.07)",
+  text:    "#F2F2F4",
+  muted:   "#8A8A90",
+  dim:     "#525258",
+};
+
+// ── useFetch hook ──────────────────────────────────────────
+function useFetch(fetchFn, deps = []) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true); setError(null);
+    fetchFn()
+      .then(d => { if (!cancelled) { setData(d); setLoading(false); } })
+      .catch(e => { if (!cancelled) { setError(e.message); setLoading(false); } });
+    return () => { cancelled = true; };
+  }, deps);
+  return { data, loading, error, reload: () => setLoading(true) };
+}
+
+// ── Loading skeleton ───────────────────────────────────────
+function Skeleton({ h = 18, w = "100%", r = 6, style }) {
+  return (
+    <div style={{
+      height: h, width: w, borderRadius: r,
+      background: `linear-gradient(90deg, ${C.card} 0%, ${C.cardHov} 50%, ${C.card} 100%)`,
+      backgroundSize: "200% 100%",
+      animation: "shimmer 1.6s infinite linear",
+      ...style,
+    }} />
+  );
+}
+
+function LoadingCard({ rows = 4 }) {
+  return (
+    <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 12 }}>
+      {Array(rows).fill(0).map((_, i) => (
+        <Skeleton key={i} h={i === 0 ? 24 : 16} w={i === 0 ? "40%" : `${70 + Math.random() * 25}%`} />
+      ))}
+    </div>
+  );
+}
+
+function ErrorMsg({ msg, onRetry }) {
+  return (
+    <div style={{
+      padding: "32px 24px", textAlign: "center",
+      fontFamily: "'Noto Sans KR', sans-serif",
+    }}>
+      <div style={{ fontSize: 32, marginBottom: 10 }}>⚠️</div>
+      <div style={{ fontSize: 13, color: C.muted, marginBottom: 16 }}>
+        {msg || "데이터를 불러오지 못했어요"}
+      </div>
+      <div style={{ fontSize: 11, color: C.dim, marginBottom: 16 }}>
+        Vercel 배포 환경에서만 라이브 데이터가 연결됩니다
+      </div>
+      {onRetry && (
+        <button onClick={onRetry} style={{
+          background: C.red, color: "#fff", border: "none",
+          padding: "8px 20px", borderRadius: 8,
+          fontFamily: "'Noto Sans KR',sans-serif", fontSize: 12, fontWeight: 700,
+          cursor: "pointer",
+        }}>다시 시도</button>
+      )}
+    </div>
+  );
+}
+
+// ── Nav ────────────────────────────────────────────────────
+function Nav({ page, setPage, liveGame }) {
+  const pages = [
+    { id: "home",     label: "홈" },
+    { id: "schedule", label: "일정·결과" },
+    { id: "roster",   label: "선수단" },
+    { id: "stats",    label: "순위·통계" },
+    { id: "live",     label: "라이브" },
+    { id: "moments",  label: "득점장면" },
+  ];
+
+  return (
+    <nav style={{
+      position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
+      background: "rgba(12,12,14,0.92)", backdropFilter: "blur(16px)",
+      borderBottom: `1px solid ${C.border}`, height: 64,
+      display: "flex", alignItems: "center",
+    }}>
+      <div style={{
+        maxWidth: 1400, margin: "0 auto", padding: "0 24px",
+        display: "flex", alignItems: "center", width: "100%",
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, marginRight: 40, cursor: "pointer", flexShrink: 0 }}
+          onClick={() => setPage("home")}>
+          <div style={{
+            width: 36, height: 36, background: C.red, borderRadius: 6,
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 800, fontSize: 16, color: "#fff",
+            boxShadow: `0 0 12px ${C.redGlow}`,
+          }}>KIA</div>
+          <div>
+            <div style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 700, fontSize: 18, color: C.text, letterSpacing: "0.5px", lineHeight: 1 }}>타이거즈</div>
+            <div style={{ fontSize: 11, color: C.muted, letterSpacing: "1.5px", textTransform: "uppercase" }}>KBO League 2026</div>
+          </div>
+        </div>
+
+        <div style={{ display: "flex", alignItems: "center", gap: 2, flex: 1 }}>
+          {pages.map(p => (
+            <button key={p.id} onClick={() => setPage(p.id)} style={{
+              padding: "6px 14px", borderRadius: 6,
+              fontFamily: "'Noto Sans KR',sans-serif", fontSize: 13, fontWeight: 500,
+              color: page === p.id ? C.text : C.muted,
+              background: page === p.id ? C.card : "transparent",
+              border: "none", cursor: "pointer", transition: "all 0.15s", whiteSpace: "nowrap",
+            }}>{p.label}</button>
+          ))}
+        </div>
+
+        {/* Live indicator */}
+        <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
+          {liveGame ? (
+            <>
+              <div style={{ width: 7, height: 7, borderRadius: "50%", background: C.red, animation: "livePulse 1.5s ease-in-out infinite" }} />
+              <span style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 700, fontSize: 13, color: C.red, letterSpacing: "1px", cursor: "pointer" }}
+                onClick={() => setPage("live")}>LIVE</span>
+              <div style={{
+                marginLeft: 4, padding: "4px 12px", borderRadius: 20,
+                background: C.card, border: `1px solid ${C.border}`,
+                fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 700, fontSize: 14, color: C.text,
+                cursor: "pointer",
+              }} onClick={() => setPage("live")}>
+                {liveGame.away} <span style={{ color: C.muted }}>{liveGame.awayScore ?? "·"}</span>
+                {" "}<span style={{ color: C.dim }}>vs</span>{" "}
+                <span style={{ color: C.red }}>{liveGame.homeScore ?? "·"}</span> {liveGame.home}
+              </div>
+            </>
+          ) : (
+            <div style={{ fontFamily: "'Noto Sans KR',sans-serif", fontSize: 11, color: C.dim }}>오늘 경기 없음</div>
+          )}
+        </div>
+      </div>
+    </nav>
+  );
+}
+
+// ── Reusable Card ──────────────────────────────────────────
+function Card({ children, style, onClick, hover = true }) {
+  const [hov, setHov] = useState(false);
+  return (
+    <div onClick={onClick}
+      onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
+      style={{
+        background: hov && hover && onClick ? C.cardHov : C.card,
+        border: `1px solid ${C.border}`, borderRadius: 12,
+        transition: "all 0.2s", cursor: onClick ? "pointer" : "default",
+        ...style,
+      }}>
+      {children}
+    </div>
+  );
+}
+
+// ── Section Header ─────────────────────────────────────────
+function SectionHead({ title, sub, action, onAction }) {
+  return (
+    <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 20 }}>
+      <div>
+        <h2 style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 800, fontSize: 26, color: C.text, margin: 0, letterSpacing: "-0.5px" }}>{title}</h2>
+        {sub && <p style={{ color: C.muted, fontSize: 12, margin: "2px 0 0", fontFamily: "'Noto Sans KR',sans-serif" }}>{sub}</p>}
+      </div>
+      {action && <button onClick={onAction} style={{ background: "none", border: "none", color: C.red, fontSize: 13, fontFamily: "'Noto Sans KR',sans-serif", cursor: "pointer", padding: 0 }}>{action} →</button>}
+    </div>
+  );
+}
+
+// ── Badge ──────────────────────────────────────────────────
+function Badge({ children, color = C.red, small }) {
+  return (
+    <span style={{
+      background: `${color}22`, color, border: `1px solid ${color}44`,
+      borderRadius: 20, padding: small ? "1px 7px" : "3px 10px",
+      fontSize: small ? 10 : 11, fontWeight: 700,
+      fontFamily: "'Barlow Condensed',sans-serif", letterSpacing: "0.5px",
+      textTransform: "uppercase", whiteSpace: "nowrap",
+    }}>{children}</span>
+  );
+}
+
+// ── Countdown ─────────────────────────────────────────────
+function Countdown({ targetDatetime }) {
+  const [t, setT] = useState({ d:0, h:0, m:0, s:0 });
+  useEffect(() => {
+    const tick = () => {
+      const diff = new Date(targetDatetime) - new Date();
+      if (diff <= 0) return;
+      setT({
+        d: Math.floor(diff / 86400000),
+        h: Math.floor((diff % 86400000) / 3600000),
+        m: Math.floor((diff % 3600000) / 60000),
+        s: Math.floor((diff % 60000) / 1000),
+      });
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, [targetDatetime]);
+
+  const box = (val, label) => (
+    <div style={{ textAlign: "center", minWidth: 52 }}>
+      <div style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 800, fontSize: 42, color: C.text, lineHeight: 1, letterSpacing: "-1px" }}>{String(val).padStart(2, "0")}</div>
+      <div style={{ fontFamily: "'Noto Sans KR',sans-serif", fontSize: 11, color: C.muted, marginTop: 2 }}>{label}</div>
+    </div>
+  );
+  const sep = () => <div style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 700, fontSize: 36, color: C.dim, paddingBottom: 8, lineHeight: 1 }}>:</div>;
+
+  return (
+    <div style={{ display: "flex", alignItems: "flex-end", gap: 8 }}>
+      {box(t.d, "일")} {sep()} {box(t.h, "시간")} {sep()} {box(t.m, "분")} {sep()} {box(t.s, "초")}
+    </div>
+  );
+}
+
+// ── Page wrapper ───────────────────────────────────────────
+function PageWrap({ children }) {
+  return (
+    <div style={{ maxWidth: 1400, margin: "0 auto", padding: "88px 24px 60px", fontFamily: "'Noto Sans KR', sans-serif" }}>
+      {children}
+    </div>
+  );
+}
+
+// ── Team logo chip ─────────────────────────────────────────
+function TeamLogo({ team, size = 32 }) {
+  const isKIA = team === "KIA";
+  return (
+    <div style={{
+      width: size, height: size, borderRadius: Math.round(size * 0.22),
+      background: isKIA ? C.red : C.surface,
+      border: `1px solid ${isKIA ? C.red : C.border}`,
+      display: "flex", alignItems: "center", justifyContent: "center",
+      fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 800,
+      fontSize: Math.round(size * 0.34), color: "#fff", flexShrink: 0,
+      boxShadow: isKIA ? `0 0 8px ${C.redGlow}` : "none",
+    }}>{TEAM_LOGO[team] || team?.slice(0,2)}</div>
+  );
+}
+
+Object.assign(window, {
+  C, useFetch, Skeleton, LoadingCard, ErrorMsg,
+  Nav, Card, SectionHead, Badge, Countdown, PageWrap, TeamLogo,
+});
+
 </script>
+  <script type="text/babel">
+// KIA Tigers - Home & Schedule Pages (Live API)
+
+const { useState, useEffect, useCallback } = React;
+
+// ── HOME PAGE ─────────────────────────────────────────────
+function HomePage({ setPage, todayGames }) {
+  const [season, setSeason] = useState(null);
+  const [seasonErr, setSeasonErr] = useState(null);
+  const [playerStats, setPlayerStats] = useState({ hitters: [], pitchers: [] });
+  const [statsLoading, setStatsLoading] = useState(true);
+
+  // Season W/L stats
+  useEffect(() => {
+    KIA_API.fetchSeasonStats()
+      .then(d => setSeason(d))
+      .catch(e => setSeasonErr(e.message));
+  }, []);
+
+  // Player stats for spotlight
+  useEffect(() => {
+    setStatsLoading(true);
+    Promise.all([
+      KIA_API.fetchPlayerStats('hitter').catch(() => []),
+      KIA_API.fetchPlayerStats('pitcher').catch(() => []),
+    ]).then(([hitters, pitchers]) => {
+      setPlayerStats({ hitters, pitchers });
+      setStatsLoading(false);
+    });
+  }, []);
+
+  const kiaGames = KIA_API.filterKIA(todayGames);
+  const liveGame = kiaGames.find(g => g.status === 'LIVE');
+  const nextGame = kiaGames.find(g => g.status === 'SCHEDULED');
+  const recentResults = (todayGames || [])
+    .filter(g => (g.home === 'KIA' || g.away === 'KIA') && g.status === 'FINAL')
+    .slice(0, 5);
+
+  // Top players
+  const topHitters  = [...(playerStats.hitters)].sort((a,b) => Number(b.hitterHra||0) - Number(a.hitterHra||0)).slice(0,3);
+  const topPitchers = [...(playerStats.pitchers)].sort((a,b) => Number(a.pitcherEra||99) - Number(b.pitcherEra||99)).slice(0,1);
+
+  const wins   = season?.wins   ?? '—';
+  const losses = season?.losses ?? '—';
+  const draws  = season?.draws  ?? '—';
+  const pct    = season?.pct    ?? '.---';
+  const streak = season ? streakLabel(season.streakType, season.streak) : '—';
+
+  return (
+    <PageWrap>
+      {/* HERO */}
+      <div style={{
+        background: `linear-gradient(135deg, ${C.redDark} 0%, #1a0005 50%, ${C.bg} 100%)`,
+        borderRadius: 20, padding: "48px 48px 40px", marginBottom: 32,
+        position: "relative", overflow: "hidden",
+        border: `1px solid rgba(232,0,29,0.2)`,
+      }}>
+        <div style={{
+          position:"absolute", top:0, right:0, width:400, height:"100%",
+          background:"radial-gradient(ellipse at top right, rgba(232,0,29,0.15) 0%, transparent 70%)",
+          pointerEvents:"none",
+        }}/>
+        <div style={{
+          position:"absolute", bottom:-40, right:60,
+          fontFamily:"'Barlow Condensed',sans-serif", fontWeight:900,
+          fontSize:220, color:"rgba(255,255,255,0.03)", lineHeight:1,
+          userSelect:"none", letterSpacing:"-10px",
+        }}>TIGERS</div>
+
+        <div style={{ display:"flex", gap:48, alignItems:"flex-start", flexWrap:"wrap", position:"relative" }}>
+          {/* Next game info */}
+          <div style={{ flex:1, minWidth:260 }}>
+            <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:16 }}>
+              <div style={{ width:4, height:16, background:C.red, borderRadius:2 }}/>
+              <span style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:12, color:"rgba(255,255,255,0.55)", letterSpacing:"1px" }}>
+                {liveGame ? "진행중" : nextGame ? "다음 경기" : "오늘 경기 없음"}
+              </span>
+            </div>
+
+            {liveGame ? (
+              <div>
+                <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:12 }}>
+                  <span style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:900, fontSize:36, color:C.red }}>{liveGame.home}</span>
+                  <div style={{ textAlign:"center" }}>
+                    <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:900, fontSize:48, color:C.text, lineHeight:1 }}>
+                      {liveGame.homeScore} - {liveGame.awayScore}
+                    </div>
+                  </div>
+                  <span style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:700, fontSize:36, color:"rgba(255,255,255,0.5)" }}>{liveGame.away}</span>
+                </div>
+                <div style={{ display:"flex", gap:12, flexWrap:"wrap" }}>
+                  <Badge>{liveGame.inningInfo || 'LIVE'}</Badge>
+                  <button onClick={() => setPage('live')} style={{
+                    background:C.red, color:"#fff", border:"none",
+                    padding:"5px 16px", borderRadius:20,
+                    fontFamily:"'Noto Sans KR',sans-serif", fontSize:12, fontWeight:700, cursor:"pointer",
+                  }}>라이브 보기 →</button>
+                </div>
+              </div>
+            ) : nextGame ? (
+              <div>
+                <div style={{ display:"flex", alignItems:"center", gap:16, marginBottom:20 }}>
+                  <span style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:900, fontSize:36, color:"#fff" }}>{nextGame.away}</span>
+                  <span style={{ color:"rgba(255,255,255,0.4)", fontSize:18 }}>VS</span>
+                  <span style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:900, fontSize:36, color:"rgba(255,255,255,0.5)" }}>{nextGame.home}</span>
+                </div>
+                <div style={{ display:"flex", gap:16, flexWrap:"wrap" }}>
+                  {[
+                    ["📅", fmtDate(nextGame.date)],
+                    ["⏰", nextGame.time || "—"],
+                    ["📍", HOME_STADIUM[nextGame.home] || nextGame.home],
+                  ].map(([icon,txt]) => (
+                    <span key={txt} style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:12, color:"rgba(255,255,255,0.7)" }}>{icon} {txt}</span>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:16, color:"rgba(255,255,255,0.5)" }}>
+                오늘 예정된 경기가 없습니다
+              </div>
+            )}
+          </div>
+
+          {/* Countdown */}
+          {nextGame && nextGame.date && nextGame.time && (
+            <div style={{ flexShrink:0 }}>
+              <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:11, color:"rgba(255,255,255,0.4)", marginBottom:10 }}>경기 시작까지</div>
+              <Countdown targetDatetime={`${String(nextGame.date).replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3')}T${nextGame.time}:00+09:00`} />
+            </div>
+          )}
+
+          {/* Season record */}
+          <div style={{
+            background:"rgba(0,0,0,0.3)", borderRadius:12, padding:"20px 28px",
+            border:"1px solid rgba(255,255,255,0.08)", flexShrink:0,
+          }}>
+            <div style={{ display:"flex", gap:24, marginBottom:12 }}>
+              {[
+                { label:"승률", val:pct, color:C.text },
+                { label:"연속", val:streak, color: season?.streakType === 'W' ? C.red : C.muted },
+              ].map(({label,val,color}) => (
+                <div key={label} style={{ textAlign:"center" }}>
+                  <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:800, fontSize:28, color, lineHeight:1 }}>{val}</div>
+                  <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:11, color:"rgba(255,255,255,0.4)", marginTop:3 }}>{label}</div>
+                </div>
+              ))}
+            </div>
+            <div style={{
+              fontFamily:"'Barlow Condensed',sans-serif", fontWeight:700, fontSize:20,
+              color:"rgba(255,255,255,0.7)", textAlign:"center",
+              borderTop:"1px solid rgba(255,255,255,0.08)", paddingTop:10,
+            }}>
+              {season ? `${wins}W · ${losses}L · ${draws}D` : <Skeleton h={20} w={100} />}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* TOP PLAYERS */}
+      <Card style={{ padding:"24px", marginBottom:20 }}>
+        <SectionHead title="시즌 선수 성적" sub="2026 KBO 정규시즌 KIA 기준"
+          action="전체 선수단" onAction={() => setPage("roster")} />
+        {statsLoading ? (
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:16 }}>
+            {[0,1,2,3].map(i => <Skeleton key={i} h={100} />)}
+          </div>
+        ) : playerStats.hitters.length === 0 ? (
+          <ErrorMsg msg="선수 데이터를 불러오지 못했어요" onRetry={() => {
+            setStatsLoading(true);
+            Promise.all([
+              KIA_API.fetchPlayerStats('hitter').catch(() => []),
+              KIA_API.fetchPlayerStats('pitcher').catch(() => []),
+            ]).then(([hitters, pitchers]) => { setPlayerStats({ hitters, pitchers }); setStatsLoading(false); });
+          }} />
+        ) : (
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(140px,1fr))", gap:16 }}>
+            {[...topHitters, ...topPitchers].map((p, i) => {
+              const isPitcher = i === topHitters.length;
+              const val = isPitcher ? Number(p.pitcherEra).toFixed(2) : Number(p.hitterHra).toFixed(3).replace(/^0/,'');
+              return (
+                <div key={p.playerName + i} style={{
+                  background:C.surface, borderRadius:10, padding:"16px",
+                  border:`1px solid ${C.border}`, textAlign:"center",
+                }}>
+                  <div style={{
+                    width:48, height:48, borderRadius:"50%", margin:"0 auto 10px",
+                    background:`linear-gradient(135deg, ${C.red}40, ${C.redDark}80)`,
+                    border:`2px solid ${C.red}60`,
+                    display:"flex", alignItems:"center", justifyContent:"center",
+                    fontFamily:"'Barlow Condensed',sans-serif", fontWeight:900, fontSize:20, color:C.text,
+                  }}>{i + 1}</div>
+                  <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontWeight:700, fontSize:14, color:C.text, marginBottom:2 }}>{p.playerName}</div>
+                  <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:800, fontSize:30, color:C.red, lineHeight:1, margin:"8px 0 2px" }}>{val}</div>
+                  <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:11, color:C.muted }}>{isPitcher ? "ERA" : "타율"}</div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </Card>
+
+      {/* Recent results + Today all games */}
+      <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:20 }}>
+        {/* Today's KIA games */}
+        <Card style={{ padding:"24px" }}>
+          <SectionHead title="오늘 경기" sub={new Date().toLocaleDateString('ko-KR', {month:'long', day:'numeric', weekday:'short'})} />
+          {kiaGames.length === 0 ? (
+            <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:13, color:C.muted, padding:"20px 0", textAlign:"center" }}>
+              오늘 KIA 경기 없음
+            </div>
+          ) : kiaGames.map((g, i) => (
+            <div key={g.gameId} style={{
+              display:"flex", alignItems:"center", gap:12,
+              padding:"12px 0",
+              borderBottom: i < kiaGames.length-1 ? `1px solid ${C.border}` : "none",
+            }}>
+              <TeamLogo team={g.away} size={28} />
+              <div style={{ flex:1 }}>
+                <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:700, fontSize:15, color:C.text }}>
+                  {g.away}
+                  {g.status !== 'SCHEDULED' && <span style={{ margin:"0 8px", color:C.muted }}>
+                    {g.awayScore} - {g.homeScore}
+                  </span>}
+                  {g.status === 'SCHEDULED' && <span style={{ color:C.dim, margin:"0 8px", fontSize:12 }}>vs</span>}
+                  {g.home}
+                </div>
+                <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:11, color:C.muted }}>
+                  {HOME_STADIUM[g.home] || g.home} · {g.time || ''}
+                </div>
+              </div>
+              <Badge color={
+                g.status === 'LIVE' ? C.red :
+                g.status === 'FINAL' ? C.dim : C.muted
+              } small>{
+                g.status === 'LIVE' ? 'LIVE' :
+                g.status === 'FINAL' ? '종료' : '예정'
+              }</Badge>
+            </div>
+          ))}
+        </Card>
+
+        {/* All today's games */}
+        <Card style={{ padding:"24px" }}>
+          <SectionHead title="오늘 전체 경기" sub="KBO 전 경기" action="일정 보기" onAction={() => setPage("schedule")} />
+          <div style={{ display:"flex", flexDirection:"column", gap:8 }}>
+            {(todayGames || []).filter(g => !['KIA'].includes(g.home) || true).slice(0,5).map((g,i) => (
+              <div key={g.gameId || i} style={{ display:"flex", alignItems:"center", gap:10, padding:"7px 0", borderBottom: i < 4 ? `1px solid ${C.border}` : "none" }}>
+                <span style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:12, color:C.muted, minWidth:28 }}>{fmtDate(g.date)}</span>
+                <div style={{ flex:1, fontFamily:"'Barlow Condensed',sans-serif", fontWeight:600, fontSize:14, color:C.text }}>
+                  <span style={{ color: g.away === 'KIA' ? C.red : C.text }}>{g.away}</span>
+                  {g.status !== 'SCHEDULED' ? (
+                    <span style={{ color:C.muted, margin:"0 6px" }}>{g.awayScore}-{g.homeScore}</span>
+                  ) : (
+                    <span style={{ color:C.dim, margin:"0 6px", fontSize:11 }}> vs </span>
+                  )}
+                  <span style={{ color: g.home === 'KIA' ? C.red : C.text }}>{g.home}</span>
+                </div>
+                <Badge color={g.status === 'LIVE' ? C.red : C.dim} small>
+                  {g.status === 'LIVE' ? 'LIVE' : g.status === 'FINAL' ? '종료' : g.time || '예정'}
+                </Badge>
+              </div>
+            ))}
+          </div>
+        </Card>
+      </div>
+    </PageWrap>
+  );
+}
+
+// ── SCHEDULE PAGE ─────────────────────────────────────────
+function SchedulePage() {
+  const [view, setView] = useState("upcoming");
+  const [dateGames, setDateGames] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  // Fetch a range of dates around today
+  const today = new Date();
+  const dates = Array.from({ length: 14 }, (_, i) => {
+    const d = new Date(today);
+    d.setDate(d.getDate() + i - 7);
+    const y = d.getFullYear();
+    const m = String(d.getMonth()+1).padStart(2,'0');
+    const dd = String(d.getDate()).padStart(2,'0');
+    return `${y}${m}${dd}`;
+  });
+
+  useEffect(() => {
+    setLoading(true);
+    const todayStr = `${today.getFullYear()}${String(today.getMonth()+1).padStart(2,'0')}${String(today.getDate()).padStart(2,'0')}`;
+    // Just fetch today and nearby; lazy load on tab switch
+    KIA_API.fetchToday()
+      .then(d => {
+        const games = d.games || [];
+        const kia = games.filter(g => g.home === 'KIA' || g.away === 'KIA');
+        setDateGames(prev => ({ ...prev, [todayStr]: kia }));
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
+  const allGames = Object.values(dateGames).flat();
+  const upcoming = allGames.filter(g => g.status === 'SCHEDULED');
+  const results  = allGames.filter(g => g.status === 'FINAL');
+
+  const GameRow = ({ g }) => {
+    const isKIAHome = g.home === 'KIA';
+    const opp = isKIAHome ? g.away : g.home;
+    const kiaScore = isKIAHome ? g.homeScore : g.awayScore;
+    const oppScore = isKIAHome ? g.awayScore : g.homeScore;
+    const won = g.status === 'FINAL' && kiaScore > oppScore;
+    const lost = g.status === 'FINAL' && kiaScore < oppScore;
+
+    return (
+      <Card style={{ padding:"20px 24px" }}>
+        <div style={{ display:"flex", alignItems:"center", gap:20, flexWrap:"wrap" }}>
+          {/* Date */}
+          <div style={{ minWidth:70, textAlign:"center", flexShrink:0 }}>
+            <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:700, fontSize:22, color:C.text, lineHeight:1 }}>
+              {fmtDate(g.date)}
+            </div>
+            <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:11, color:C.muted, marginTop:2 }}>
+              {fmtDay(g.date)}요일
+            </div>
+          </div>
+
+          {/* Teams */}
+          <div style={{ flex:1, display:"flex", alignItems:"center", gap:12 }}>
+            <TeamLogo team={g.away} size={36} />
+            <span style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:16, fontWeight: g.away === 'KIA' ? 700 : 400, color: g.away === 'KIA' ? C.text : C.muted }}>{g.away}</span>
+
+            <div style={{ textAlign:"center", minWidth:70 }}>
+              {g.status === 'FINAL' ? (
+                <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:800, fontSize:28, color:C.text, letterSpacing:"-1px" }}>
+                  {g.awayScore} - {g.homeScore}
+                </div>
+              ) : g.status === 'LIVE' ? (
+                <div>
+                  <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:800, fontSize:28, color:C.red }}>
+                    {g.awayScore ?? '·'} - {g.homeScore ?? '·'}
+                  </div>
+                  <Badge small>{g.inningInfo || 'LIVE'}</Badge>
+                </div>
+              ) : (
+                <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:700, fontSize:18, color:C.dim }}>VS</div>
+              )}
+            </div>
+
+            <span style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:16, fontWeight: g.home === 'KIA' ? 700 : 400, color: g.home === 'KIA' ? C.text : C.muted }}>{g.home}</span>
+            <TeamLogo team={g.home} size={36} />
+          </div>
+
+          {/* Meta */}
+          <div style={{ display:"flex", gap:10, alignItems:"center", flexShrink:0 }}>
+            {g.status === 'SCHEDULED' && <span style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:700, fontSize:16, color:C.muted }}>{g.time}</span>}
+            <span style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:11, color:C.muted }}>{HOME_STADIUM[g.home] || g.home}</span>
+            {g.status === 'FINAL' && (
+              <div style={{
+                padding:"4px 14px", borderRadius:20,
+                background: won ? `${C.red}20` : `${C.dim}20`,
+                border:`1px solid ${won ? C.red+'50' : C.border}`,
+                fontFamily:"'Barlow Condensed',sans-serif", fontWeight:800, fontSize:14,
+                color: won ? C.red : C.muted,
+              }}>{won ? '승' : lost ? '패' : '무'}</div>
+            )}
+            {g.status === 'LIVE' && <Badge>LIVE</Badge>}
+          </div>
+
+          {/* Starters */}
+          {(g.awayStarter || g.homeStarter) && (
+            <div style={{ width:"100%", fontFamily:"'Noto Sans KR',sans-serif", fontSize:11, color:C.dim, paddingTop:8, borderTop:`1px solid ${C.border}` }}>
+              선발: {g.awayStarter || '미정'} vs {g.homeStarter || '미정'}
+              {g.winPitcher && <span style={{ marginLeft:12, color:C.muted }}>승 {g.winPitcher}</span>}
+              {g.losePitcher && <span style={{ marginLeft:8, color:C.muted }}>패 {g.losePitcher}</span>}
+            </div>
+          )}
+        </div>
+      </Card>
+    );
+  };
+
+  return (
+    <PageWrap>
+      <SectionHead title="경기 일정 & 결과" sub="2026 KBO 정규시즌 KIA 타이거즈" />
+
+      <div style={{ display:"flex", gap:4, marginBottom:24, background:C.card, borderRadius:10, padding:4, width:"fit-content" }}>
+        {[["upcoming","예정 경기"],["results","경기 결과"]].map(([id,label]) => (
+          <button key={id} onClick={() => setView(id)} style={{
+            padding:"8px 20px", borderRadius:7, border:"none", cursor:"pointer",
+            fontFamily:"'Noto Sans KR',sans-serif", fontSize:13, fontWeight:600,
+            background: view === id ? C.red : "transparent",
+            color: view === id ? "#fff" : C.muted, transition:"all 0.15s",
+          }}>{label}</button>
+        ))}
+      </div>
+
+      {loading ? (
+        <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
+          {[0,1,2].map(i => <Card key={i} style={{ overflow:"hidden" }}><LoadingCard rows={3} /></Card>)}
+        </div>
+      ) : (view === "upcoming" ? upcoming : results).length === 0 ? (
+        <Card style={{ padding:40, textAlign:"center" }}>
+          <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:13, color:C.muted }}>
+            {view === "upcoming" ? "예정된 경기 데이터가 없어요" : "결과 데이터가 없어요"}
+          </div>
+          <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:11, color:C.dim, marginTop:6 }}>
+            Vercel 배포 환경에서 실시간 데이터가 연결됩니다
+          </div>
+        </Card>
+      ) : (
+        <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
+          {(view === "upcoming" ? upcoming : results).map((g, i) => (
+            <GameRow key={g.gameId || i} g={g} />
+          ))}
+        </div>
+      )}
+    </PageWrap>
+  );
+}
+
+Object.assign(window, { HomePage, SchedulePage });
+
+</script>
+  <script type="text/babel">
+// KIA Tigers - Roster & Stats Pages (Live API)
+
+const { useState, useEffect } = React;
+
+// ── ROSTER PAGE ───────────────────────────────────────────
+function RosterPage() {
+  const [tab, setTab] = useState("hitter");
+  const [players, setPlayers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selected, setSelected] = useState(null);
+
+  const load = (t) => {
+    setLoading(true); setError(null); setSelected(null);
+    KIA_API.fetchPlayerStats(t)
+      .then(d => { setPlayers(d || []); setLoading(false); })
+      .catch(e => { setError(e.message); setLoading(false); });
+  };
+
+  useEffect(() => { load(tab); }, [tab]);
+
+  // hitter columns
+  const hitterCols = [
+    { key:"playerName", label:"선수", left:true },
+    { key:"hitterHra",  label:"타율", fmt: v => v != null ? Number(v).toFixed(3).replace(/^0/,'') : '—' },
+    { key:"hitterGame", label:"경기" },
+    { key:"hitterHit",  label:"안타" },
+    { key:"hitterHr",   label:"홈런", accent:true },
+    { key:"hitterRbi",  label:"타점", accent:true },
+    { key:"hitterRun",  label:"득점" },
+    { key:"hitterBb",   label:"볼넷" },
+    { key:"hitterSb",   label:"도루" },
+    { key:"hitterObp",  label:"출루율", fmt: v => v != null ? Number(v).toFixed(3).replace(/^0/,'') : '—' },
+    { key:"hitterSlg",  label:"장타율", fmt: v => v != null ? Number(v).toFixed(3).replace(/^0/,'') : '—' },
+  ];
+
+  // pitcher columns
+  const pitcherCols = [
+    { key:"playerName",  label:"선수",  left:true },
+    { key:"pitcherEra",  label:"ERA",  fmt: v => v != null ? Number(v).toFixed(2) : '—', accent:true },
+    { key:"pitcherGame", label:"경기" },
+    { key:"pitcherWin",  label:"승",   accent:true },
+    { key:"pitcherLose", label:"패" },
+    { key:"pitcherSv",   label:"세이브" },
+    { key:"pitcherHld",  label:"홀드" },
+    { key:"pitcherIp",   label:"이닝" },
+    { key:"pitcherKk",   label:"탈삼진" },
+    { key:"pitcherBb",   label:"볼넷" },
+    { key:"pitcherWhip", label:"WHIP", fmt: v => v != null ? Number(v).toFixed(2) : '—' },
+  ];
+
+  const cols = tab === "hitter" ? hitterCols : pitcherCols;
+  const sortKey = tab === "hitter" ? "hitterHra" : "pitcherEra";
+  const sorted = [...players].sort((a,b) =>
+    tab === "hitter"
+      ? Number(b[sortKey]||0) - Number(a[sortKey]||0)
+      : Number(a[sortKey]||99) - Number(b[sortKey]||99)
+  );
+
+  // Detail modal using selected player from table
+  const ModalDetail = () => {
+    const p = selected;
+    if (!p) return null;
+    return (
+      <div style={{
+        position:"fixed", inset:0, background:"rgba(0,0,0,0.8)", backdropFilter:"blur(8px)",
+        display:"flex", alignItems:"center", justifyContent:"center", zIndex:200, padding:24,
+      }} onClick={() => setSelected(null)}>
+        <div style={{
+          background:C.card, border:`1px solid ${C.red}40`,
+          borderRadius:20, padding:32, maxWidth:460, width:"100%", position:"relative",
+          maxHeight:"80vh", overflowY:"auto",
+        }} onClick={e => e.stopPropagation()}>
+          <div style={{ position:"absolute", top:0, left:0, right:0, height:4, background:`linear-gradient(90deg, ${C.red}, transparent)`, borderRadius:"20px 20px 0 0" }}/>
+          <button onClick={() => setSelected(null)} style={{ position:"absolute", top:16, right:16, background:"none", border:"none", color:C.muted, fontSize:20, cursor:"pointer" }}>✕</button>
+
+          <div style={{ marginTop:8, marginBottom:24 }}>
+            <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontWeight:700, fontSize:22, color:C.text, marginBottom:6 }}>{p.playerName}</div>
+            {p.positionName && <Badge small color={tab === "hitter" ? C.red : "#A855F7"}>{p.positionName}</Badge>}
+          </div>
+
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:10 }}>
+            {cols.filter(c => c.key !== "playerName").map(c => {
+              const raw = p[c.key];
+              const val = c.fmt ? c.fmt(raw) : (raw != null ? raw : "—");
+              return (
+                <div key={c.key} style={{ background:C.surface, borderRadius:8, padding:"12px 10px", textAlign:"center" }}>
+                  <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:800, fontSize:22, color: c.accent ? C.red : C.text }}>{val}</div>
+                  <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:10, color:C.muted, marginTop:2 }}>{c.label}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const Th = ({c}) => (
+    <th style={{
+      fontFamily:"'Noto Sans KR',sans-serif", fontSize:11, fontWeight:700,
+      color: c.key === sortKey ? C.red : C.muted,
+      padding:"9px 10px", textAlign: c.left ? "left" : "center",
+      borderBottom:`1px solid ${C.border}`,
+      whiteSpace:"nowrap", cursor:"default",
+    }}>{c.label}</th>
+  );
+
+  return (
+    <PageWrap>
+      <SectionHead title="선수단 성적" sub="2026 KBO 정규시즌 KIA 타이거즈" />
+
+      {/* Tab */}
+      <div style={{ display:"flex", gap:4, marginBottom:24, background:C.card, borderRadius:10, padding:4, width:"fit-content" }}>
+        {[["hitter","타자"],["pitcher","투수"]].map(([id,label]) => (
+          <button key={id} onClick={() => setTab(id)} style={{
+            padding:"8px 24px", borderRadius:7, border:"none", cursor:"pointer",
+            fontFamily:"'Noto Sans KR',sans-serif", fontSize:13, fontWeight:600,
+            background: tab === id ? C.red : "transparent",
+            color: tab === id ? "#fff" : C.muted, transition:"all 0.15s",
+          }}>{label}</button>
+        ))}
+      </div>
+
+      <Card style={{ overflow:"hidden" }}>
+        {loading ? <LoadingCard rows={10} /> : error ? (
+          <ErrorMsg msg={error} onRetry={() => load(tab)} />
+        ) : sorted.length === 0 ? (
+          <div style={{ padding:"40px", textAlign:"center", fontFamily:"'Noto Sans KR',sans-serif", fontSize:13, color:C.muted }}>선수 데이터가 없어요</div>
+        ) : (
+          <div style={{ overflowX:"auto" }}>
+            <table style={{ width:"100%", borderCollapse:"collapse" }}>
+              <thead>
+                <tr style={{ background:C.surface }}>
+                  <th style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:12, color:C.dim, padding:"9px 10px", textAlign:"center", borderBottom:`1px solid ${C.border}`, minWidth:32 }}>#</th>
+                  {cols.map(c => <Th key={c.key} c={c} />)}
+                </tr>
+              </thead>
+              <tbody>
+                {sorted.map((p, i) => (
+                  <tr key={p.playerName + i}
+                    onClick={() => setSelected(p)}
+                    style={{
+                      cursor:"pointer",
+                      background: i % 2 === 0 ? "rgba(255,255,255,0.015)" : "transparent",
+                      transition:"background 0.1s",
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.background = `${C.red}08`}
+                    onMouseLeave={e => e.currentTarget.style.background = i % 2 === 0 ? "rgba(255,255,255,0.015)" : "transparent"}
+                  >
+                    <td style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:700, fontSize:14, color:C.dim, padding:"10px 10px", textAlign:"center", borderBottom:`1px solid ${C.border}` }}>{i+1}</td>
+                    {cols.map(c => {
+                      const raw = p[c.key];
+                      const val = c.fmt ? c.fmt(raw) : (raw != null ? raw : "—");
+                      const isName = c.key === "playerName";
+                      const isAccent = c.key === sortKey;
+                      return (
+                        <td key={c.key} style={{
+                          padding:"10px 10px",
+                          textAlign: c.left ? "left" : "center",
+                          borderBottom:`1px solid ${C.border}`,
+                          fontFamily: isName ? "'Noto Sans KR',sans-serif" : "'Barlow Condensed',sans-serif",
+                          fontWeight: isName ? 700 : isAccent ? 800 : 500,
+                          fontSize: isName ? 13 : isAccent ? 18 : 14,
+                          color: isName ? C.text : isAccent ? C.red : C.muted,
+                          whiteSpace:"nowrap",
+                        }}>{val}</td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </Card>
+
+      <ModalDetail />
+    </PageWrap>
+  );
+}
+
+// ── STATS PAGE ────────────────────────────────────────────
+function StatsPage() {
+  const [statsTab, setStatsTab] = useState("hitter");
+  const [players, setPlayers]   = useState([]);
+  const [loading, setLoading]   = useState(true);
+  const [error, setError]       = useState(null);
+
+  const load = (t) => {
+    setLoading(true); setError(null);
+    KIA_API.fetchPlayerStats(t)
+      .then(d => { setPlayers(d || []); setLoading(false); })
+      .catch(e => { setError(e.message); setLoading(false); });
+  };
+
+  useEffect(() => { load(statsTab); }, [statsTab]);
+
+  const hitterCols = [
+    { key:"playerName", label:"선수", left:true },
+    { key:"hitterHra",  label:"타율", fmt: v => v != null ? Number(v).toFixed(3).replace(/^0/,'') : '—', accent:true },
+    { key:"hitterHr",   label:"홈런", accent:true },
+    { key:"hitterRbi",  label:"타점" },
+    { key:"hitterHit",  label:"안타" },
+    { key:"hitterSb",   label:"도루" },
+    { key:"hitterObp",  label:"출루율", fmt: v => v != null ? Number(v).toFixed(3).replace(/^0/,'') : '—' },
+    { key:"hitterSlg",  label:"장타율", fmt: v => v != null ? Number(v).toFixed(3).replace(/^0/,'') : '—' },
+  ];
+
+  const pitcherCols = [
+    { key:"playerName",  label:"선수", left:true },
+    { key:"pitcherEra",  label:"ERA",  fmt: v => v != null ? Number(v).toFixed(2) : '—', accent:true },
+    { key:"pitcherWin",  label:"승",   accent:true },
+    { key:"pitcherLose", label:"패" },
+    { key:"pitcherSv",   label:"세이브" },
+    { key:"pitcherKk",   label:"탈삼진" },
+    { key:"pitcherIp",   label:"이닝" },
+    { key:"pitcherWhip", label:"WHIP", fmt: v => v != null ? Number(v).toFixed(2) : '—' },
+  ];
+
+  const cols = statsTab === "hitter" ? hitterCols : pitcherCols;
+  const sortKey = statsTab === "hitter" ? "hitterHra" : "pitcherEra";
+  const sorted = [...players].sort((a,b) =>
+    statsTab === "hitter"
+      ? Number(b[sortKey]||0) - Number(a[sortKey]||0)
+      : Number(a[sortKey]||99) - Number(b[sortKey]||99)
+  );
+
+  return (
+    <PageWrap>
+      <SectionHead title="순위 & 통계" sub="2026 KBO 정규시즌 KIA 선수 기록" />
+
+      <div style={{ display:"flex", gap:4, marginBottom:24, background:C.card, borderRadius:10, padding:4, width:"fit-content" }}>
+        {[["hitter","타자 성적"],["pitcher","투수 성적"]].map(([id,label]) => (
+          <button key={id} onClick={() => setStatsTab(id)} style={{
+            padding:"8px 20px", borderRadius:7, border:"none", cursor:"pointer",
+            fontFamily:"'Noto Sans KR',sans-serif", fontSize:13, fontWeight:600,
+            background: statsTab === id ? C.red : "transparent",
+            color: statsTab === id ? "#fff" : C.muted, transition:"all 0.15s",
+          }}>{label}</button>
+        ))}
+      </div>
+
+      {/* leaderboard top 3 */}
+      {!loading && !error && sorted.length > 0 && (
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:16, marginBottom:24 }}>
+          {sorted.slice(0,3).map((p,i) => {
+            const raw = p[sortKey];
+            const val = cols.find(c=>c.key===sortKey)?.fmt ? cols.find(c=>c.key===sortKey).fmt(raw) : raw;
+            const medals = ["🥇","🥈","🥉"];
+            return (
+              <Card key={p.playerName+i} style={{ padding:"20px 24px" }}>
+                <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:10 }}>
+                  <span style={{ fontSize:22 }}>{medals[i]}</span>
+                  <Badge color={i===0?C.gold:C.muted} small>{i+1}위</Badge>
+                </div>
+                <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontWeight:700, fontSize:18, color:C.text, marginBottom:4 }}>{p.playerName}</div>
+                <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:900, fontSize:40, color: i===0?C.red:C.text, lineHeight:1 }}>{val}</div>
+                <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:11, color:C.muted, marginTop:4 }}>{cols.find(c=>c.key===sortKey)?.label}</div>
+              </Card>
+            );
+          })}
+        </div>
+      )}
+
+      <Card style={{ overflow:"hidden" }}>
+        {loading ? <LoadingCard rows={10} /> : error ? (
+          <ErrorMsg msg={error} onRetry={() => load(statsTab)} />
+        ) : (
+          <div style={{ overflowX:"auto" }}>
+            <table style={{ width:"100%", borderCollapse:"collapse" }}>
+              <thead>
+                <tr style={{ background:C.surface }}>
+                  <th style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:12, color:C.dim, padding:"9px 10px", textAlign:"center", borderBottom:`1px solid ${C.border}` }}>#</th>
+                  {cols.map(c => (
+                    <th key={c.key} style={{
+                      fontFamily:"'Noto Sans KR',sans-serif", fontSize:11, fontWeight:700,
+                      color: c.key === sortKey ? C.red : C.muted,
+                      padding:"9px 12px", textAlign: c.left ? "left" : "center",
+                      borderBottom:`1px solid ${C.border}`, whiteSpace:"nowrap",
+                    }}>{c.label}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {sorted.map((p, i) => (
+                  <tr key={p.playerName+i} style={{ background: i < 3 ? `${C.red}06` : i%2===0 ? "rgba(255,255,255,0.012)" : "transparent" }}>
+                    <td style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:700, fontSize:16, color: i<3?C.gold:C.dim, padding:"10px 10px", textAlign:"center", borderBottom:`1px solid ${C.border}` }}>{i+1}</td>
+                    {cols.map(c => {
+                      const raw = p[c.key];
+                      const val = c.fmt ? c.fmt(raw) : (raw != null ? raw : "—");
+                      return (
+                        <td key={c.key} style={{
+                          padding:"10px 12px",
+                          textAlign: c.left ? "left" : "center",
+                          borderBottom:`1px solid ${C.border}`,
+                          fontFamily: c.left ? "'Noto Sans KR',sans-serif" : "'Barlow Condensed',sans-serif",
+                          fontWeight: c.left ? 700 : c.accent ? 800 : 500,
+                          fontSize: c.left ? 13 : c.accent ? 18 : 14,
+                          color: c.left ? C.text : c.accent ? (i===0?C.red:C.text) : C.muted,
+                          whiteSpace:"nowrap",
+                        }}>{val}</td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </Card>
+    </PageWrap>
+  );
+}
+
+Object.assign(window, { RosterPage, StatsPage });
+
+</script>
+  <script type="text/babel">
+// KIA Tigers - Live Game & Scoring Moments Pages (Live API)
+
+const { useState, useEffect, useRef } = React;
+
+// ── LIVE GAME PAGE ────────────────────────────────────────
+function LiveGamePage({ todayGames }) {
+  const kiaGames = KIA_API.filterKIA(todayGames || []);
+  const liveOrRecent = kiaGames.find(g => g.status === 'LIVE')
+    || kiaGames.find(g => g.status === 'FINAL')
+    || kiaGames[0];
+
+  const [gameDetail, setGameDetail] = useState(null);
+  const [lineupData, setLineupData] = useState(null);
+  const [loading, setLoading]       = useState(true);
+  const [error, setError]           = useState(null);
+  const [selectedGame, setSelectedGame] = useState(liveOrRecent?.gameId || null);
+  const pollRef = useRef(null);
+
+  const load = async (gameId) => {
+    if (!gameId) { setLoading(false); return; }
+    setLoading(true); setError(null);
+    try {
+      const [detail, lineup] = await Promise.all([
+        KIA_API.fetchGame(gameId),
+        KIA_API.fetchLineup(gameId).catch(() => null),
+      ]);
+      setGameDetail(detail);
+      setLineupData(lineup);
+    } catch(e) {
+      setError(e.message);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    if (selectedGame) load(selectedGame);
+    // Auto-poll every 30s if live
+    pollRef.current = setInterval(() => {
+      if (selectedGame && gameDetail?.status === 'LIVE') load(selectedGame);
+    }, 30000);
+    return () => clearInterval(pollRef.current);
+  }, [selectedGame]);
+
+  // Helpers
+  const g = gameDetail;
+  const gs = g?.currentGameState || lineupData?.currentGameState;
+  const isKIAHome = g?.home === 'KIA';
+  const kiaScore  = isKIAHome ? g?.homeScore : g?.awayScore;
+  const oppScore  = isKIAHome ? g?.awayScore : g?.homeScore;
+  const opp       = isKIAHome ? g?.away : g?.home;
+  const kiaInnings  = isKIAHome ? g?.homeInnings : g?.awayInnings;
+  const oppInnings  = isKIAHome ? g?.awayInnings : g?.homeInnings;
+
+  // Diamond
+  const Diamond = ({ gs }) => {
+    if (!gs) return null;
+    const b1 = gs.base1 > 0, b2 = gs.base2 > 0, b3 = gs.base3 > 0;
+    const Base = ({ filled, style }) => (
+      <div style={{
+        width: 20, height: 20, transform: "rotate(45deg)", borderRadius: 3,
+        background: filled ? C.gold : "transparent",
+        border: `2px solid ${filled ? C.gold : C.dim}`,
+        boxShadow: filled ? `0 0 8px ${C.gold}80` : "none",
+        ...style,
+      }} />
+    );
+    return (
+      <div style={{ position:"relative", width:72, height:72 }}>
+        <div style={{ position:"absolute", top:4,  left:"50%", transform:"translateX(-50%)" }}><Base filled={b2} /></div>
+        <div style={{ position:"absolute", top:"50%", right:4,  transform:"translateY(-50%)" }}><Base filled={b1} /></div>
+        <div style={{ position:"absolute", top:"50%", left:4,  transform:"translateY(-50%)" }}><Base filled={b3} /></div>
+        <div style={{ position:"absolute", bottom:4, left:"50%", transform:"translateX(-50%)" }}><Base filled={false} /></div>
+      </div>
+    );
+  };
+
+  const CountDot = ({ filled, color }) => (
+    <div style={{ width:12, height:12, borderRadius:"50%", background: filled ? color : "transparent", border:`2px solid ${filled ? color : C.dim}`, boxShadow: filled ? `0 0 6px ${color}80` : "none" }} />
+  );
+
+  // Line score table
+  const LineScore = ({ g, kiaInnings, oppInnings }) => {
+    if (!g) return null;
+    const maxInn = Math.max(9, (kiaInnings||[]).length, (oppInnings||[]).length);
+    const inns = Array.from({ length: maxInn }, (_, i) => i);
+    return (
+      <div style={{ overflowX:"auto" }}>
+        <table style={{ width:"100%", borderCollapse:"collapse", minWidth:500 }}>
+          <thead>
+            <tr>
+              <th style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:11, color:C.dim, padding:"4px 8px", textAlign:"left", minWidth:48 }}>팀</th>
+              {inns.map(i => (
+                <th key={i} style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:13, padding:"4px 6px", textAlign:"center", minWidth:28, color:C.muted, fontWeight:500 }}>{i+1}</th>
+              ))}
+              <th style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:13, color:C.text, padding:"4px 10px", textAlign:"center", fontWeight:700, borderLeft:`1px solid ${C.border}` }}>R</th>
+              <th style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:13, color:C.muted, padding:"4px 10px", textAlign:"center" }}>H</th>
+              <th style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:13, color:C.muted, padding:"4px 10px", textAlign:"center" }}>E</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              { label: g.away, inns: g.awayInnings || [], r: g.awayScore, isKIA: g.away === 'KIA' },
+              { label: g.home, inns: g.homeInnings || [], r: g.homeScore, isKIA: g.home === 'KIA' },
+            ].map(row => (
+              <tr key={row.label}>
+                <td style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:700, fontSize:14, color: row.isKIA ? C.red : C.muted, padding:"6px 8px" }}>{row.label}</td>
+                {inns.map(i => (
+                  <td key={i} style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:600, fontSize:14, color: row.inns[i] > 0 ? C.text : C.dim, padding:"6px 6px", textAlign:"center" }}>
+                    {row.inns[i] === -1 || row.inns[i] == null ? "—" : row.inns[i]}
+                  </td>
+                ))}
+                <td style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:800, fontSize:16, color: row.isKIA ? C.red : C.text, padding:"6px 10px", textAlign:"center", borderLeft:`1px solid ${C.border}` }}>{row.r ?? '—'}</td>
+                <td style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:500, fontSize:13, color:C.muted, padding:"6px 10px", textAlign:"center" }}>—</td>
+                <td style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:500, fontSize:13, color:C.muted, padding:"6px 10px", textAlign:"center" }}>—</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
+
+  if (!liveOrRecent && !loading) {
+    return (
+      <PageWrap>
+        <div style={{ padding:"60px 0", textAlign:"center" }}>
+          <div style={{ fontSize:40, marginBottom:16 }}>⚾</div>
+          <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:16, color:C.muted }}>오늘 KIA 경기가 없어요</div>
+        </div>
+      </PageWrap>
+    );
+  }
+
+  return (
+    <PageWrap>
+      {/* Game selector */}
+      {kiaGames.length > 1 && (
+        <div style={{ display:"flex", gap:8, marginBottom:20 }}>
+          {kiaGames.map(game => (
+            <button key={game.gameId} onClick={() => setSelectedGame(game.gameId)} style={{
+              padding:"8px 16px", borderRadius:8, border:`1px solid ${selectedGame === game.gameId ? C.red : C.border}`,
+              background: selectedGame === game.gameId ? `${C.red}20` : C.card,
+              fontFamily:"'Barlow Condensed',sans-serif", fontWeight:700, fontSize:14,
+              color: selectedGame === game.gameId ? C.red : C.muted, cursor:"pointer",
+            }}>{game.away} vs {game.home}</button>
+          ))}
+        </div>
+      )}
+
+      {/* Live header */}
+      <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:24 }}>
+        {g?.status === 'LIVE' && <div style={{ width:8, height:8, borderRadius:"50%", background:C.red, animation:"livePulse 1.5s ease-in-out infinite" }} />}
+        <span style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:800, fontSize:22, color: g?.status === 'LIVE' ? C.red : C.muted, letterSpacing:"2px" }}>
+          {g?.status === 'LIVE' ? 'LIVE' : g?.status === 'FINAL' ? '경기 종료' : '경기 예정'}
+        </span>
+        {g?.status === 'LIVE' && <Badge>{g.inningInfo}</Badge>}
+        <span style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:13, color:C.dim }}>
+          {g ? `${fmtDate(g.date)} · ${HOME_STADIUM[g.home] || g.home}` : ''}
+        </span>
+      </div>
+
+      {loading ? (
+        <Card style={{ overflow:"hidden" }}><LoadingCard rows={6} /></Card>
+      ) : error ? (
+        <Card><ErrorMsg msg={error} onRetry={() => load(selectedGame)} /></Card>
+      ) : g ? (
+        <div style={{ display:"grid", gridTemplateColumns:"1fr 320px", gap:20 }}>
+          {/* Main scoreboard */}
+          <div style={{ display:"flex", flexDirection:"column", gap:16 }}>
+            {/* Big score */}
+            <Card style={{ padding:"32px 36px", background:`linear-gradient(135deg, #0C0C0E 0%, #1a0005 100%)`, border:"1px solid rgba(232,0,29,0.2)" }}>
+              <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:28 }}>
+                {[
+                  { team:g.away, score:g.awayScore, isKIA:g.away==='KIA', align:"left" },
+                  { team:g.home, score:g.homeScore, isKIA:g.home==='KIA', align:"right" },
+                ].map((side,idx) => (
+                  <React.Fragment key={side.team}>
+                    <div style={{ textAlign:"center" }}>
+                      <div style={{ display:"flex", alignItems:"center", gap:10, justifyContent:"center", marginBottom:8 }}>
+                        <TeamLogo team={side.team} size={44} />
+                        <span style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:800, fontSize:22, color: side.isKIA ? C.text : C.muted }}>{side.team}</span>
+                      </div>
+                      <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:900, fontSize:88, lineHeight:1, letterSpacing:"-4px", color: side.isKIA ? C.red : C.text, textShadow: side.isKIA ? `0 0 40px ${C.redGlow}` : "none" }}>
+                        {side.score ?? '—'}
+                      </div>
+                      <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:11, color:C.muted, marginTop:4 }}>{idx===0?'원정':'홈'}</div>
+                    </div>
+                    {idx===0 && <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:700, fontSize:18, color:C.dim }}>VS</div>}
+                  </React.Fragment>
+                ))}
+              </div>
+              <LineScore g={g} />
+            </Card>
+
+            {/* Text relay */}
+            {(g.textRelays?.length > 0) && (
+              <Card style={{ padding:"24px" }}>
+                <SectionHead title="플레이 로그" sub="최근 주요 장면" />
+                <div style={{ display:"flex", flexDirection:"column", gap:0 }}>
+                  {g.textRelays.slice(0, 12).map((relay, i) => {
+                    const text = relay.resultText || relay.text || relay.title || '';
+                    if (!text) return null;
+                    const isScore = /홈런|안타|득점|타점/.test(text);
+                    return (
+                      <div key={i} style={{ display:"flex", gap:12, padding:"10px 0", borderBottom: i < 11 ? `1px solid ${C.border}` : "none", opacity: i === 0 ? 1 : Math.max(0.4, 1 - i * 0.07) }}>
+                        <div style={{ width:8, height:8, borderRadius:"50%", flexShrink:0, marginTop:5, background: isScore ? C.red : C.border, boxShadow: isScore ? `0 0 6px ${C.redGlow}` : "none" }} />
+                        <div style={{ flex:1 }}>
+                          {relay.inning && <span style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:700, fontSize:11, color:C.muted, marginRight:8 }}>{relay.inning}회</span>}
+                          <span style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:13, color: isScore ? C.text : C.muted, lineHeight:1.5 }}>{text}</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </Card>
+            )}
+          </div>
+
+          {/* Side panel */}
+          <div style={{ display:"flex", flexDirection:"column", gap:16 }}>
+            {/* Current situation */}
+            {gs && g.status === 'LIVE' && (
+              <Card style={{ padding:"22px" }}>
+                <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:700, fontSize:13, color:C.muted, letterSpacing:"1px", marginBottom:16 }}>경기 상황</div>
+                <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:18 }}>
+                  {/* BSO */}
+                  <div>
+                    {[["볼", gs.ball ?? 0, "#22C55E", 4],["스트라이크", gs.strike ?? 0, C.gold, 3],["아웃", gs.out ?? 0, C.red, 3]].map(([label, val, color, max]) => (
+                      <div key={label} style={{ marginBottom:8 }}>
+                        <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:9, color:C.muted, marginBottom:4 }}>{label}</div>
+                        <div style={{ display:"flex", gap:4 }}>
+                          {Array.from({length: max}, (_,i) => <CountDot key={i} filled={i < val} color={color} />)}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <Diamond gs={gs} />
+                </div>
+
+                {/* Batter */}
+                {gs.batterName && (
+                  <div style={{ background:C.surface, borderRadius:8, padding:"12px", marginBottom:10 }}>
+                    <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:10, color:C.muted, marginBottom:6 }}>타자</div>
+                    <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontWeight:700, fontSize:16, color:C.text }}>{gs.batterName}</div>
+                  </div>
+                )}
+
+                {/* Pitcher */}
+                {gs.pitcherName && (
+                  <div style={{ background:C.surface, borderRadius:8, padding:"12px" }}>
+                    <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:10, color:C.muted, marginBottom:6 }}>투수</div>
+                    <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontWeight:700, fontSize:16, color:C.text }}>{gs.pitcherName}</div>
+                  </div>
+                )}
+              </Card>
+            )}
+
+            {/* Lineup */}
+            {lineupData && (() => {
+              const kiaKey = g.home === 'KIA' ? 'homeLineup' : 'awayLineup';
+              const kiaLineup = lineupData[kiaKey];
+              const batters = kiaLineup?.batter || [];
+              if (!batters.length) return null;
+              return (
+                <Card style={{ padding:"22px" }}>
+                  <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:700, fontSize:13, color:C.muted, letterSpacing:"1px", marginBottom:14 }}>KIA 타순</div>
+                  {batters.slice(0,9).map((p, i) => (
+                    <div key={i} style={{
+                      display:"flex", alignItems:"center", gap:10,
+                      padding:"7px 0", borderBottom: i < 8 ? `1px solid ${C.border}` : "none",
+                      background: p.name === gs?.batterName ? `${C.red}10` : "transparent",
+                      borderRadius:4, paddingLeft: p.name === gs?.batterName ? 6 : 0,
+                    }}>
+                      <span style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:700, fontSize:13, color:C.dim, minWidth:14 }}>{p.batOrder || i+1}</span>
+                      {p.name === gs?.batterName && <div style={{ width:4, height:4, borderRadius:"50%", background:C.red, flexShrink:0 }} />}
+                      <span style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:13, color: p.name === gs?.batterName ? C.text : C.muted, fontWeight: p.name === gs?.batterName ? 600 : 400, flex:1 }}>{p.name}</span>
+                      <span style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:11, color:C.dim }}>{p.posName || ''}</span>
+                      {p.hit != null && <span style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:12, color:C.muted }}>{p.ab}타{p.hit}안</span>}
+                    </div>
+                  ))}
+                </Card>
+              );
+            })()}
+
+            {/* Pitcher stats */}
+            {lineupData && (() => {
+              const kiaKey = g.home === 'KIA' ? 'homeLineup' : 'awayLineup';
+              const pitchers = lineupData[kiaKey]?.pitcher || [];
+              if (!pitchers.length) return null;
+              return (
+                <Card style={{ padding:"22px" }}>
+                  <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:700, fontSize:13, color:C.muted, letterSpacing:"1px", marginBottom:14 }}>KIA 투수</div>
+                  {pitchers.map((p, i) => (
+                    <div key={i} style={{ display:"flex", alignItems:"center", justifyContent:"space-between", padding:"8px 0", borderBottom: i < pitchers.length-1 ? `1px solid ${C.border}` : "none" }}>
+                      <div>
+                        <span style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:14, fontWeight:600, color:C.text }}>{p.name}</span>
+                        <span style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:12, color:C.muted, marginLeft:8 }}>{p.inn || '—'}이닝</span>
+                      </div>
+                      <div style={{ display:"flex", gap:12 }}>
+                        {p.pc > 0 && <div style={{ textAlign:"center" }}>
+                          <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:800, fontSize:18, color: p.pc > 100 ? C.red : C.text }}>{p.pc}</div>
+                          <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:9, color:C.muted }}>투구수</div>
+                        </div>}
+                        {p.er != null && <div style={{ textAlign:"center" }}>
+                          <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:700, fontSize:16, color:C.muted }}>{p.er}</div>
+                          <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:9, color:C.muted }}>실점</div>
+                        </div>}
+                      </div>
+                    </div>
+                  ))}
+                </Card>
+              );
+            })()}
+          </div>
+        </div>
+      ) : null}
+    </PageWrap>
+  );
+}
+
+// ── SCORING MOMENTS PAGE ──────────────────────────────────
+function ScoringMomentsPage({ todayGames }) {
+  const kiaGames = KIA_API.filterKIA(todayGames || []).filter(g => g.status === 'FINAL' || g.status === 'LIVE');
+  const [selectedGameId, setSelectedGameId] = useState(kiaGames[0]?.gameId || null);
+  const [gameDetail, setGameDetail] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selectedRelay, setSelectedRelay] = useState(0);
+
+  useEffect(() => {
+    if (!selectedGameId) { setLoading(false); return; }
+    setLoading(true); setError(null);
+    KIA_API.fetchGame(selectedGameId)
+      .then(d => { setGameDetail(d); setLoading(false); })
+      .catch(e => { setError(e.message); setLoading(false); });
+  }, [selectedGameId]);
+
+  // Filter relays with actual scoring info
+  const g = gameDetail;
+  const relays = g?.textRelays || [];
+  const scoringRelays = relays.filter(r => {
+    const text = r.resultText || r.text || r.title || '';
+    return /홈런|적시타|득점|타점|안타/.test(text);
+  });
+
+  const PitchZoneViz = ({ zone }) => {
+    const zones = {
+      "외각 낮음":{x:75,y:72}, "내각 낮음":{x:25,y:72}, "중앙 낮음":{x:50,y:72},
+      "외각 중간":{x:75,y:50}, "내각 중간":{x:25,y:50}, "중앙 중간":{x:50,y:50},
+      "외각 높음":{x:75,y:28}, "내각 높음":{x:25,y:28}, "중앙 높음":{x:50,y:28},
+    };
+    const pos = zones[zone] || {x:50, y:50};
+    return (
+      <div style={{ display:"inline-block" }}>
+        <div style={{ position:"relative", width:88, height:88, border:`2px solid ${C.dim}`, borderRadius:4, background:C.surface }}>
+          {[33,66].map(p => (
+            <React.Fragment key={p}>
+              <div style={{ position:"absolute", left:`${p}%`, top:0, bottom:0, width:1, background:C.border }} />
+              <div style={{ position:"absolute", top:`${p}%`, left:0, right:0, height:1, background:C.border }} />
+            </React.Fragment>
+          ))}
+          <div style={{
+            position:"absolute", left:`${pos.x}%`, top:`${pos.y}%`,
+            transform:"translate(-50%,-50%)",
+            width:14, height:14, borderRadius:"50%",
+            background:C.red, boxShadow:`0 0 8px ${C.redGlow}`,
+            border:"2px solid #fff",
+          }} />
+        </div>
+        {zone && <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:9, color:C.muted, textAlign:"center", marginTop:3 }}>{zone}</div>}
+      </div>
+    );
+  };
+
+  if (!kiaGames.length && !loading) {
+    return (
+      <PageWrap>
+        <SectionHead title="득점 장면" sub="이닝별 득점 상세 기록" />
+        <Card style={{ padding:40, textAlign:"center" }}>
+          <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:13, color:C.muted }}>오늘 완료된 KIA 경기가 없어요</div>
+          <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:11, color:C.dim, marginTop:6 }}>경기 종료 후 득점 장면 기록이 표시됩니다</div>
+        </Card>
+      </PageWrap>
+    );
+  }
+
+  return (
+    <PageWrap>
+      <SectionHead title="득점 장면" sub="이닝별 주요 플레이 기록" />
+
+      {/* Game header */}
+      {g && (
+        <Card style={{ padding:"18px 24px", marginBottom:20, display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:12 }}>
+          <div style={{ display:"flex", alignItems:"center", gap:16 }}>
+            <span style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:13, color:C.muted }}>{fmtDate(g.date)}</span>
+            <div style={{ display:"flex", alignItems:"center", gap:10 }}>
+              <span style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:800, fontSize:22, color: g.away === 'KIA' ? C.red : C.muted }}>{g.away}</span>
+              <span style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:900, fontSize:32, color:C.text }}>{g.awayScore ?? '?'} - {g.homeScore ?? '?'}</span>
+              <span style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:800, fontSize:22, color: g.home === 'KIA' ? C.red : C.muted }}>{g.home}</span>
+            </div>
+            <Badge>{g.status === 'FINAL' ? '최종' : g.status === 'LIVE' ? 'LIVE' : '—'}</Badge>
+          </div>
+          <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:12, color:C.muted }}>
+            주요 플레이 {scoringRelays.length}건
+          </div>
+        </Card>
+      )}
+
+      {loading ? <Card><LoadingCard rows={6} /></Card> : error ? (
+        <Card><ErrorMsg msg={error} onRetry={() => { setLoading(true); KIA_API.fetchGame(selectedGameId).then(d=>{setGameDetail(d);setLoading(false);}).catch(e=>{setError(e.message);setLoading(false);}); }} /></Card>
+      ) : scoringRelays.length === 0 ? (
+        <Card style={{ padding:40, textAlign:"center" }}>
+          <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:13, color:C.muted }}>득점 장면 데이터가 없어요</div>
+          <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:11, color:C.dim, marginTop:6 }}>라이브 경기 중에는 실시간으로 업데이트됩니다</div>
+        </Card>
+      ) : (
+        <div>
+          {/* Scoring relay timeline */}
+          <div style={{ display:"flex", gap:6, marginBottom:20, overflowX:"auto", paddingBottom:4 }}>
+            {scoringRelays.map((r, i) => (
+              <button key={i} onClick={() => setSelectedRelay(i)} style={{
+                flexShrink:0, padding:"8px 12px", borderRadius:8,
+                border:`1px solid ${selectedRelay === i ? C.red : C.border}`,
+                background: selectedRelay === i ? `${C.red}20` : C.card,
+                cursor:"pointer", transition:"all 0.15s",
+              }}>
+                {r.inning && <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:700, fontSize:11, color:C.muted, marginBottom:2 }}>{r.inning}회</div>}
+                <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:11, color: selectedRelay === i ? C.red : C.muted, maxWidth:80, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>
+                  {(r.resultText || r.text || '').slice(0, 12)}
+                </div>
+              </button>
+            ))}
+          </div>
+
+          {/* Detail of selected relay */}
+          {(() => {
+            const r = scoringRelays[selectedRelay];
+            if (!r) return null;
+            const text = r.resultText || r.text || r.title || '';
+            const isKIAPlay = text.includes(g?.home === 'KIA' ? (g?.home) : (g?.away));
+            return (
+              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:20 }}>
+                <Card style={{ padding:"28px" }}>
+                  <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:20 }}>
+                    <div>
+                      {r.inning && <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:800, fontSize:32, color:C.red, lineHeight:1 }}>{r.inning}회</div>}
+                    </div>
+                    <Badge color={C.red}>득점 장면</Badge>
+                  </div>
+                  <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:16, color:C.text, lineHeight:1.8, padding:"16px", background:`${C.red}10`, borderRadius:8, border:`1px solid ${C.red}20` }}>
+                    {text}
+                  </div>
+                </Card>
+
+                <Card style={{ padding:"28px" }}>
+                  <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:700, fontSize:13, color:C.muted, letterSpacing:"1px", marginBottom:20 }}>투구 위치 (추정)</div>
+                  <div style={{ display:"flex", gap:24, alignItems:"flex-start" }}>
+                    <PitchZoneViz zone={null} />
+                    <div>
+                      <div style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:11, color:C.dim, lineHeight:1.7 }}>
+                        투구 위치 데이터는<br/>네이버 스포츠 API에서<br/>제공되지 않습니다
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            );
+          })()}
+
+          {/* Full relay list */}
+          <Card style={{ padding:"24px", marginTop:20 }}>
+            <SectionHead title="전체 득점 플레이" sub={`총 ${scoringRelays.length}건`} />
+            <div style={{ display:"flex", flexDirection:"column", gap:0 }}>
+              {scoringRelays.map((r, i) => {
+                const text = r.resultText || r.text || r.title || '';
+                const isHR = /홈런/.test(text);
+                return (
+                  <div key={i} onClick={() => setSelectedRelay(i)} style={{
+                    display:"flex", gap:14, padding:"12px 8px",
+                    borderBottom: i < scoringRelays.length-1 ? `1px solid ${C.border}` : "none",
+                    cursor:"pointer",
+                    background: selectedRelay === i ? `${C.red}08` : "transparent",
+                    borderRadius:6, transition:"background 0.1s",
+                  }}>
+                    <div style={{ width:8, height:8, borderRadius:"50%", flexShrink:0, marginTop:5, background: isHR ? C.gold : C.red, boxShadow: isHR ? `0 0 6px ${C.gold}80` : `0 0 4px ${C.redGlow}` }} />
+                    <div style={{ flex:1 }}>
+                      {r.inning && <span style={{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:700, fontSize:11, color:C.muted, marginRight:8 }}>{r.inning}회</span>}
+                      {isHR && <Badge color={C.gold} small>홈런</Badge>}
+                      {/적시타/.test(text) && <Badge color={C.red} small style={{marginLeft:4}}>적시타</Badge>}
+                      <span style={{ fontFamily:"'Noto Sans KR',sans-serif", fontSize:13, color:C.text, marginLeft:6, lineHeight:1.5 }}>{text}</span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </Card>
+        </div>
+      )}
+    </PageWrap>
+  );
+}
+
+Object.assign(window, { LiveGamePage, ScoringMomentsPage });
+
+</script>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    function App() {
+      const [page, setPage]           = useState("home");
+      const [todayGames, setTodayGames] = useState([]);
+      const [gamesLoading, setGamesLoading] = useState(true);
+
+      // 오늘 전체 경기 한 번만 fetch → 모든 페이지에 prop으로 내려줌
+      useEffect(() => {
+        KIA_API.fetchToday()
+          .then(d => { setTodayGames(d.games || []); })
+          .catch(() => {})
+          .finally(() => setGamesLoading(false));
+      }, []);
+
+      // 30초마다 오늘 경기 갱신
+      useEffect(() => {
+        const id = setInterval(() => {
+          KIA_API.fetchToday()
+            .then(d => setTodayGames(d.games || []))
+            .catch(() => {});
+        }, 30000);
+        return () => clearInterval(id);
+      }, []);
+
+      const liveGame = KIA_API.liveGame(todayGames);
+
+      const renderPage = () => {
+        switch(page) {
+          case "home":     return <HomePage    setPage={setPage} todayGames={todayGames} />;
+          case "schedule": return <SchedulePage />;
+          case "roster":   return <RosterPage />;
+          case "stats":    return <StatsPage />;
+          case "live":     return <LiveGamePage todayGames={todayGames} />;
+          case "moments":  return <ScoringMomentsPage todayGames={todayGames} />;
+          default:         return <HomePage    setPage={setPage} todayGames={todayGames} />;
+        }
+      };
+
+      return (
+        <div style={{ minHeight:"100vh", background:"#0C0C0E" }}>
+          <Nav page={page} setPage={setPage} liveGame={liveGame} />
+          <div key={page} className="page-enter">
+            {renderPage()}
+          </div>
+
+          {/* API 연결 상태 배너 */}
+          {!gamesLoading && todayGames.length === 0 && (
+            <div style={{
+              position:"fixed", bottom:20, left:"50%", transform:"translateX(-50%)",
+              background:"#1C1C1F", border:"1px solid rgba(255,255,255,0.1)",
+              borderRadius:10, padding:"10px 20px",
+              fontFamily:"'Noto Sans KR',sans-serif", fontSize:12,
+              color:"rgba(255,255,255,0.5)",
+              display:"flex", alignItems:"center", gap:8,
+              zIndex:50, boxShadow:"0 4px 20px rgba(0,0,0,0.4)",
+            }}>
+              <span style={{ fontSize:14 }}>⚡</span>
+              Vercel 배포 시 /api/kboScores 와 자동 연결됩니다
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
 </body>
 </html>
-
-
-
-
-
-
