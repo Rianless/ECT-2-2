@@ -416,6 +416,40 @@ export default async function handler(req, res) {
       return res.status(200).json(season);
     }
 
+    // ── 선수 시즌 성적 (타자 / 투수) ──────────────────────────────
+    if (action === 'playerStats') {
+      const tab       = String(query.tab || 'hitter');       // 'hitter' | 'pitcher'
+      const teamCode  = String(query.teamCode  || 'HT');     // HT = KIA
+      const seasonCode= String(query.seasonCode|| kst.getUTCFullYear());
+      const type      = tab === 'pitcher' ? 'pitcher' : 'hitter';
+
+      // 네이버 스포츠 팀별 선수 성적 API (여러 경로 순차 시도)
+      const candidateUrls = [
+        `https://api-gw.sports.naver.com/stats/record?fields=basic&upperCategoryId=kbaseball&categoryId=kbo&teamCode=${teamCode}&type=${type}&year=${seasonCode}`,
+        `https://api-gw.sports.naver.com/stats/players?upperCategoryId=kbaseball&categoryId=kbo&teamCode=${teamCode}&type=${type}&seasonCode=${seasonCode}`,
+        `https://api-gw.sports.naver.com/stats/teams/${teamCode}/players?upperCategoryId=kbaseball&categoryId=kbo&type=${type}&year=${seasonCode}`,
+        `https://api-gw.sports.naver.com/kbaseball/teams/${teamCode}/players?fields=basic&type=${type}&seasonCode=${seasonCode}`,
+      ];
+
+      let players = null;
+      for (const url of candidateUrls) {
+        try {
+          const data = await fetchJson(url, 8000);
+          const r = data?.result || data || {};
+          const list = r.seasonPlayerStats || r.playerList || r.players || r.list || r.data || null;
+          if (list && Array.isArray(list) && list.length > 0) {
+            players = list;
+            break;
+          }
+        } catch {}
+      }
+
+      if (!players) {
+        return res.status(200).json({ result: { seasonPlayerStats: [] }, _note: 'playerStats endpoint not found' });
+      }
+      return res.status(200).json({ result: { seasonPlayerStats: players } });
+    }
+
     if (gameId && action === 'lineup') {
       const lineupRaw = await fetchLineup(gameId, inning || 1);
       const recordRaw = lineupRaw ? null : await fetchGameRecord(gameId);
