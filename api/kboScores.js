@@ -419,69 +419,84 @@ export default async function handler(req, res) {
 
     // ── 선수 시즌 성적 (타자 / 투수) ──────────────────────────────
     if (action === 'playerStats') {
-      const tab       = String(query.tab || 'hitter');       // 'hitter' | 'pitcher'
-      const teamCode  = String(query.teamCode  || 'HT');     // HT = KIA
+      const tab       = String(query.tab || 'hitter');
+      const teamCode  = String(query.teamCode  || 'HT');
       const seasonCode= String(query.seasonCode|| kst.getUTCFullYear());
       const type      = tab === 'pitcher' ? 'pitcher' : 'hitter';
 
-      const statsHeaders = { ...HEADERS, Referer: 'https://m.sports.naver.com/kbaseball/record/player' };
+      // 다양한 API 필드명을 프론트엔드 포맷으로 정규화
+      function normalizePlayer(p, t) {
+        const name = p.name || p.playerName || p.nameKr || p.player_name || '';
+        if (t === 'pitcher') {
+          return {
+            ...p, name,
+            pitcherEra:  p.pitcherEra  ?? p.era  ?? p.ERA  ?? null,
+            pitcherWin:  p.pitcherWin  ?? p.win  ?? p.w   ?? null,
+            pitcherLose: p.pitcherLose ?? p.lose ?? p.l   ?? null,
+            pitcherSave: p.pitcherSave ?? p.save ?? p.sv  ?? null,
+            pitcherHold: p.pitcherHold ?? p.hold ?? p.hld ?? null,
+            pitcherInn:  p.pitcherInn  ?? p.ip   ?? p.inning ?? null,
+            pitcherKk:   p.pitcherKk   ?? p.kk   ?? p.so  ?? null,
+          };
+        }
+        return {
+          ...p, name,
+          hitterHra: p.hitterHra ?? p.hra ?? p.avg ?? p.battingAvg ?? null,
+          hitterHit: p.hitterHit ?? p.hit ?? null,
+          hitterAb:  p.hitterAb  ?? p.ab  ?? null,
+          hitterRbi: p.hitterRbi ?? p.rbi ?? null,
+          hitterRun: p.hitterRun ?? p.run ?? p.r   ?? null,
+          hitterHr:  p.hitterHr  ?? p.hr  ?? p.homeRun ?? null,
+        };
+      }
 
-      // 네이버 스포츠 팀별 선수 성적 API (여러 경로 순차 시도, seasonCode 우선)
-      const candidateUrls = [
-        `https://api-gw.sports.naver.com/stats/record?fields=basic&upperCategoryId=kbaseball&categoryId=kbo&teamCode=${teamCode}&type=${type}&seasonCode=${seasonCode}`,
-        `https://api-gw.sports.naver.com/stats/record?fields=basic&upperCategoryId=kbaseball&categoryId=kbo&teamCode=${teamCode}&type=${type}&year=${seasonCode}`,
-        `https://api-gw.sports.naver.com/stats/players?upperCategoryId=kbaseball&categoryId=kbo&teamCode=${teamCode}&type=${type}&seasonCode=${seasonCode}`,
-        `https://api-gw.sports.naver.com/stats/teams/${teamCode}/players?upperCategoryId=kbaseball&categoryId=kbo&type=${type}&seasonCode=${seasonCode}`,
-        `https://api-gw.sports.naver.com/kbaseball/teams/${teamCode}/players?fields=basic&type=${type}&seasonCode=${seasonCode}`,
+      function extractList(data) {
+        const r = data?.result || data || {};
+        return r.seasonPlayerStats || r.playerList || r.players || r.list
+            || r.data || r.records || r.playerRecords || r.record
+            || r.recordList || r.hitterRecords || r.pitcherRecords || null;
+      }
+
+      const browserUA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36';
+
+      // Naver stats/* 는 Vercel IP에서 403으로 차단됨 → Daum/Kakao Sports 사용
+      const sources = [
+        {
+          url: `https://sports.daum.net/sports-api/kbo/record/player?gamePart=0&seasonCode=${seasonCode}&teamCode=${teamCode}&recordType=${type === 'pitcher' ? 'PITCHER' : 'HITTER'}&sort=${type === 'pitcher' ? 'ERA' : 'HRA'}&limit=100&page=1`,
+          headers: { 'User-Agent': browserUA, Accept: 'application/json, */*', 'Accept-Language': 'ko-KR,ko;q=0.9', Referer: 'https://sports.daum.net/record/kbo/player' },
+        },
+        {
+          url: `https://sports.daum.net/sports-api/kbo/record/player?seasonCode=${seasonCode}&teamCode=${teamCode}&recordType=${type === 'pitcher' ? 'PITCHER' : 'HITTER'}&limit=100`,
+          headers: { 'User-Agent': browserUA, Accept: 'application/json, */*', 'Accept-Language': 'ko-KR,ko;q=0.9' },
+        },
+        {
+          url: `https://m.sports.daum.net/sports-api/kbo/record/player?seasonCode=${seasonCode}&teamCode=${teamCode}&recordType=${type === 'pitcher' ? 'PITCHER' : 'HITTER'}&limit=100`,
+          headers: { 'User-Agent': browserUA, Accept: 'application/json, */*', 'Accept-Language': 'ko-KR,ko;q=0.9', Referer: 'https://m.sports.daum.net' },
+        },
+        {
+          url: `https://www.kbo.co.kr/ajax/player/playerRecordList.do?season=${seasonCode}&teamCode=${teamCode}&pos=${type === 'pitcher' ? 'P' : 'H'}&pageNum=1&pageSize=100`,
+          headers: { 'User-Agent': browserUA, Accept: 'application/json, */*', 'Accept-Language': 'ko-KR,ko;q=0.9', Referer: 'https://www.kbo.co.kr' },
+        },
       ];
 
       let players = null;
       const fetchErrors = [];
       let firstRawResponse = null;
 
-      for (const url of candidateUrls) {
+      for (const { url, headers } of sources) {
         try {
-          const response = await fetchWithTimeout(url, { headers: statsHeaders }, 8000);
+          const response = await fetchWithTimeout(url, { headers }, 9000);
           if (!response.ok) { fetchErrors.push(`${url}: HTTP ${response.status}`); continue; }
           const data = await response.json();
           if (!firstRawResponse) firstRawResponse = data;
-          const r = data?.result || data || {};
-          const list = r.seasonPlayerStats || r.playerList || r.players || r.list || r.data
-                    || r.records || r.playerRecords || r.record || r.recordList
-                    || r.hitterRecords || r.pitcherRecords || null;
-          if (list && Array.isArray(list) && list.length > 0) { players = list; break; }
-          fetchErrors.push(`${url}: empty (keys: ${Object.keys(r).join(',')})`);
-        } catch (e) { fetchErrors.push(`${url}: ${e.message}`); }
-      }
-
-      // Fallback: Naver Sports 모바일 페이지 __NEXT_DATA__ 스크래핑
-      if (!players) {
-        try {
-          const pageUrl = `https://m.sports.naver.com/kbaseball/record/player?type=${type}&teamCode=${teamCode}&seasonCode=${seasonCode}`;
-          const pageRes = await fetchWithTimeout(pageUrl, {
-            headers: {
-              'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Mobile/21E236 Safari/604.1',
-              Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-              'Accept-Language': 'ko-KR,ko;q=0.9',
-              'Cache-Control': 'no-cache',
-            },
-          }, 12000);
-          if (pageRes.ok) {
-            const html = await pageRes.text();
-            const m = html.match(/<script id="__NEXT_DATA__"[^>]*>([\s\S]*?)<\/script>/);
-            if (m) {
-              const nd = JSON.parse(m[1]);
-              const queries = nd?.props?.pageProps?.dehydratedState?.queries || [];
-              for (const q of queries) {
-                const r = q?.state?.data?.result || q?.state?.data || {};
-                const list = r.seasonPlayerStats || r.playerList || r.players || r.list || null;
-                if (list && Array.isArray(list) && list.length > 0) { players = list; break; }
-              }
-            }
-          } else {
-            fetchErrors.push(`page: HTTP ${pageRes.status}`);
+          const list = extractList(data);
+          if (list && Array.isArray(list) && list.length > 0) {
+            players = list.map(p => normalizePlayer(p, type));
+            break;
           }
-        } catch (e) { fetchErrors.push(`page: ${e.message}`); }
+          const r = data?.result || data || {};
+          fetchErrors.push(`${url}: empty (keys: ${Object.keys(r).slice(0, 10).join(',')})`);
+        } catch (e) { fetchErrors.push(`${url}: ${e.message}`); }
       }
 
       if (!players) {
@@ -489,7 +504,7 @@ export default async function handler(req, res) {
           result: { seasonPlayerStats: [] },
           _note: 'playerStats endpoint not found',
           _errors: fetchErrors,
-          _rawSample: firstRawResponse ? JSON.stringify(firstRawResponse).slice(0, 500) : null,
+          _rawSample: firstRawResponse ? JSON.stringify(firstRawResponse).slice(0, 600) : null,
         });
       }
       return res.status(200).json({ result: { seasonPlayerStats: players } });
