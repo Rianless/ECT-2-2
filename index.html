@@ -198,7 +198,7 @@ function ErrorMsg({ msg, onRetry }) {
         {msg || "데이터를 불러오지 못했어요"}
       </div>
       <div style={{ fontSize: 11, color: C.dim, marginBottom: 16 }}>
-        Vercel 배포 환경에서만 라이브 데이터가 연결됩니다
+        잠시 후 다시 시도해 주세요
       </div>
       {onRetry && (
         <button onClick={onRetry} style={{

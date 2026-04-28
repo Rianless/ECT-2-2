@@ -423,29 +423,64 @@ export default async function handler(req, res) {
       const seasonCode= String(query.seasonCode|| kst.getUTCFullYear());
       const type      = tab === 'pitcher' ? 'pitcher' : 'hitter';
 
-      // 네이버 스포츠 팀별 선수 성적 API (여러 경로 순차 시도)
+      const statsHeaders = { ...HEADERS, Referer: 'https://m.sports.naver.com/kbaseball/record/player' };
+
+      // 네이버 스포츠 팀별 선수 성적 API (여러 경로 순차 시도, seasonCode 우선)
       const candidateUrls = [
+        `https://api-gw.sports.naver.com/stats/record?fields=basic&upperCategoryId=kbaseball&categoryId=kbo&teamCode=${teamCode}&type=${type}&seasonCode=${seasonCode}`,
         `https://api-gw.sports.naver.com/stats/record?fields=basic&upperCategoryId=kbaseball&categoryId=kbo&teamCode=${teamCode}&type=${type}&year=${seasonCode}`,
         `https://api-gw.sports.naver.com/stats/players?upperCategoryId=kbaseball&categoryId=kbo&teamCode=${teamCode}&type=${type}&seasonCode=${seasonCode}`,
-        `https://api-gw.sports.naver.com/stats/teams/${teamCode}/players?upperCategoryId=kbaseball&categoryId=kbo&type=${type}&year=${seasonCode}`,
+        `https://api-gw.sports.naver.com/stats/teams/${teamCode}/players?upperCategoryId=kbaseball&categoryId=kbo&type=${type}&seasonCode=${seasonCode}`,
         `https://api-gw.sports.naver.com/kbaseball/teams/${teamCode}/players?fields=basic&type=${type}&seasonCode=${seasonCode}`,
       ];
 
       let players = null;
+      const fetchErrors = [];
+
       for (const url of candidateUrls) {
         try {
-          const data = await fetchJson(url, 8000);
+          const response = await fetchWithTimeout(url, { headers: statsHeaders }, 8000);
+          if (!response.ok) { fetchErrors.push(`${url}: HTTP ${response.status}`); continue; }
+          const data = await response.json();
           const r = data?.result || data || {};
           const list = r.seasonPlayerStats || r.playerList || r.players || r.list || r.data || null;
-          if (list && Array.isArray(list) && list.length > 0) {
-            players = list;
-            break;
+          if (list && Array.isArray(list) && list.length > 0) { players = list; break; }
+          fetchErrors.push(`${url}: empty list`);
+        } catch (e) { fetchErrors.push(`${url}: ${e.message}`); }
+      }
+
+      // Fallback: Naver Sports 모바일 페이지 __NEXT_DATA__ 스크래핑
+      if (!players) {
+        try {
+          const pageUrl = `https://m.sports.naver.com/kbaseball/record/player?type=${type}&teamCode=${teamCode}&seasonCode=${seasonCode}`;
+          const pageRes = await fetchWithTimeout(pageUrl, {
+            headers: {
+              'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Mobile/21E236 Safari/604.1',
+              Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+              'Accept-Language': 'ko-KR,ko;q=0.9',
+              'Cache-Control': 'no-cache',
+            },
+          }, 12000);
+          if (pageRes.ok) {
+            const html = await pageRes.text();
+            const m = html.match(/<script id="__NEXT_DATA__"[^>]*>([\s\S]*?)<\/script>/);
+            if (m) {
+              const nd = JSON.parse(m[1]);
+              const queries = nd?.props?.pageProps?.dehydratedState?.queries || [];
+              for (const q of queries) {
+                const r = q?.state?.data?.result || q?.state?.data || {};
+                const list = r.seasonPlayerStats || r.playerList || r.players || r.list || null;
+                if (list && Array.isArray(list) && list.length > 0) { players = list; break; }
+              }
+            }
+          } else {
+            fetchErrors.push(`page: HTTP ${pageRes.status}`);
           }
-        } catch {}
+        } catch (e) { fetchErrors.push(`page: ${e.message}`); }
       }
 
       if (!players) {
-        return res.status(200).json({ result: { seasonPlayerStats: [] }, _note: 'playerStats endpoint not found' });
+        return res.status(200).json({ result: { seasonPlayerStats: [] }, _note: 'playerStats endpoint not found', _errors: fetchErrors });
       }
       return res.status(200).json({ result: { seasonPlayerStats: players } });
     }
