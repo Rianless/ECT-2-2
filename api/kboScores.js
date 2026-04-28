@@ -437,16 +437,20 @@ export default async function handler(req, res) {
 
       let players = null;
       const fetchErrors = [];
+      let firstRawResponse = null;
 
       for (const url of candidateUrls) {
         try {
           const response = await fetchWithTimeout(url, { headers: statsHeaders }, 8000);
           if (!response.ok) { fetchErrors.push(`${url}: HTTP ${response.status}`); continue; }
           const data = await response.json();
+          if (!firstRawResponse) firstRawResponse = data;
           const r = data?.result || data || {};
-          const list = r.seasonPlayerStats || r.playerList || r.players || r.list || r.data || null;
+          const list = r.seasonPlayerStats || r.playerList || r.players || r.list || r.data
+                    || r.records || r.playerRecords || r.record || r.recordList
+                    || r.hitterRecords || r.pitcherRecords || null;
           if (list && Array.isArray(list) && list.length > 0) { players = list; break; }
-          fetchErrors.push(`${url}: empty list`);
+          fetchErrors.push(`${url}: empty (keys: ${Object.keys(r).join(',')})`);
         } catch (e) { fetchErrors.push(`${url}: ${e.message}`); }
       }
 
@@ -481,7 +485,12 @@ export default async function handler(req, res) {
       }
 
       if (!players) {
-        return res.status(200).json({ result: { seasonPlayerStats: [] }, _note: 'playerStats endpoint not found', _errors: fetchErrors });
+        return res.status(200).json({
+          result: { seasonPlayerStats: [] },
+          _note: 'playerStats endpoint not found',
+          _errors: fetchErrors,
+          _rawSample: firstRawResponse ? JSON.stringify(firstRawResponse).slice(0, 500) : null,
+        });
       }
       return res.status(200).json({ result: { seasonPlayerStats: players } });
     }
